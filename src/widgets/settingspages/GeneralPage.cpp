@@ -35,6 +35,7 @@
 #include <QLabel>
 #include <QMessageBox>
 #include <QPalette>
+#include <QProcess>
 #include <QSignalBlocker>
 
 namespace {
@@ -132,17 +133,17 @@ void GeneralPage::initLayout(GeneralPageView &layout)
 {
     auto &s = *getSettings();
 
-    layout.addTitle("Interface");
+    layout.addTitle(this->tr("Interface"));
 
     {
         auto *themes = getApp()->getThemes();
         auto available = themes->availableThemes();
         available.emplace_back("System", "System");
 
-        SettingWidget::dropdown("Theme", themes->themeName, available)
+        SettingWidget::dropdown(this->tr("Theme"), themes->themeName, available)
             ->addTo(layout);
 
-        SettingWidget::dropdown("Dark system theme",
+        SettingWidget::dropdown(this->tr("Dark system theme"),
                                 themes->darkSystemThemeName,
                                 themes->availableThemes())
             ->setTooltip("This theme is selected if your system is in a dark "
@@ -150,7 +151,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
             ->conditionallyEnabledBy(themes->themeName, "System")
             ->addTo(layout);
 
-        SettingWidget::dropdown("Light system theme",
+        SettingWidget::dropdown(this->tr("Light system theme"),
                                 themes->lightSystemThemeName,
                                 themes->availableThemes())
             ->setTooltip("This theme is selected if your system is in a light "
@@ -159,26 +160,25 @@ void GeneralPage::initLayout(GeneralPageView &layout)
             ->addTo(layout);
     }
 
-    layout.addDropdown<QString>(
-        "Language / Язык", {"Русский", "English"}, s.uiLanguage,
-        [](const QString &val) -> std::variant<int, QString> {
-            if (val == "en")
-            {
-                return 1;
-            }
-            return 0;
-        },
-        [](DropdownArgs args) -> QString {
-            if (args.index == 1 || args.value == "English")
-            {
-                return "en";
-            }
-            return "ru";
-        },
-        false);
+    auto *langWidget = SettingWidget::dropdown(
+        this->tr("Language (requires restart)"),
+        s.uiLanguage,
+        {
+            {QString::fromUtf8("Русский"), "ru"},
+            {QString::fromUtf8("English"), "en"},
+        });
+    langWidget->addTo(layout);
+
+    layout.addButton(
+        this->tr("Restart Chatterino to apply language"),
+        [] {
+            getSettings()->requestSave();
+            QProcess::startDetached(qApp->applicationFilePath(), {});
+            QApplication::exit(0);
+        });
 
     layout.addDropdown<float>(
-        "Zoom", ZOOM_LEVELS, s.uiScale,
+        this->tr("Zoom"), ZOOM_LEVELS, s.uiScale,
         [](auto val) {
             if (val == 1)
             {
@@ -194,7 +194,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         });
     ComboBox *tabDirectionDropdown =
         layout.addDropdown<std::underlying_type_t<NotebookTabLocation>>(
-            "Tab layout", {"Top", "Left", "Right", "Bottom"}, s.tabDirection,
+            this->tr("Tab layout"), {"Top", "Left", "Right", "Bottom"}, s.tabDirection,
             [](auto val) {
                 switch (val)
                 {
@@ -234,7 +234,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         tabDirectionDropdown->minimumSizeHint().width());
 
     layout.addDropdown<std::underlying_type_t<NotebookTabVisibility>>(
-        "Tab visibility", {"All tabs", "Only live tabs"}, s.tabVisibility,
+        this->tr("Tab visibility"), {"All tabs", "Only live tabs"}, s.tabVisibility,
         [](auto val) {
             switch (val)
             {
@@ -257,8 +257,8 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         },
         false, "Choose which tabs are visible in the notebook");
 
-    SettingWidget::dropdown("Tab style", s.tabStyle)->addTo(layout);
-    SettingWidget::checkbox("Extend wrapped tabs", s.growWrappedNotebookLines)
+    SettingWidget::dropdown(this->tr("Tab style"), s.tabStyle)->addTo(layout);
+    SettingWidget::checkbox(this->tr("Extend wrapped tabs"), s.growWrappedNotebookLines)
         ->setTooltip("When horizontal tabs are wrapped, extend the line for "
                      "the whole width of the window.")
         ->addTo(layout);
@@ -267,14 +267,14 @@ void GeneralPage::initLayout(GeneralPageView &layout)
                                            s.chatFontWeight),
                      {"font", "weight", "size"});
 
-    SettingWidget::inverseCheckbox("Show message reply context",
+    SettingWidget::inverseCheckbox(this->tr("Show message reply context"),
                                    s.hideReplyContext)
         ->setTooltip(
             "This setting will only affect how messages are shown. You can "
             "reply to a message regardless of this setting.")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Show message reply button", s.showReplyButton)
+    SettingWidget::checkbox(this->tr("Show message reply button"), s.showReplyButton)
         ->setTooltip("Show a reply button next to every chat message")
         ->addTo(layout);
 
@@ -287,19 +287,19 @@ void GeneralPage::initLayout(GeneralPageView &layout)
             removeTabSeq.toString(QKeySequence::SequenceFormat::NativeText);
     }
 
-    SettingWidget::checkbox("Show tab close button", s.showTabCloseButton)
+    SettingWidget::checkbox(this->tr("Show tab close button"), s.showTabCloseButton)
         ->setTooltip(
             "When disabled, the x to close a tab will be hidden.\nTabs can "
             "still be closed by right-clicking or pressing " +
             removeTabShortcut + ".")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Always on top", s.windowTopMost)
+    SettingWidget::checkbox(this->tr("Always on top"), s.windowTopMost)
         ->setTooltip("Always keep Chatterino as the top window.")
         ->addTo(layout);
 
 #ifdef USEWINSDK
-    SettingWidget::checkbox("Start with Windows", s.autorun)
+    SettingWidget::checkbox(this->tr("Start with Windows"), s.autorun)
         ->setTooltip("Start Chatterino when your computer starts.")
         ->addTo(layout);
 #endif
@@ -324,12 +324,12 @@ void GeneralPage::initLayout(GeneralPageView &layout)
             ->addTo(layout);
     }
 
-    SettingWidget::checkbox("Mark tabs with live channels", s.showTabLive)
+    SettingWidget::checkbox(this->tr("Mark tabs with live channels"), s.showTabLive)
         ->setTooltip("Shows a red dot in the top right corner of a tab to "
                      "indicate one of the channels in the tab is live.")
         ->addTo(layout);
 
-    layout.addTitle("Chat");
+    layout.addTitle(this->tr("Chat"));
 
     layout.addDropdown<float>(
         "Pause on mouse hover",
@@ -383,18 +383,18 @@ void GeneralPage::initLayout(GeneralPageView &layout)
             return fuzzyToFloat(args.value, 1.f);
         });
 
-    SettingWidget::checkbox("Smooth scrolling", s.enableSmoothScrolling)
+    SettingWidget::checkbox(this->tr("Smooth scrolling"), s.enableSmoothScrolling)
         ->addTo(layout);
 
-    SettingWidget::checkbox("Smooth scrolling on new messages",
+    SettingWidget::checkbox(this->tr("Smooth scrolling on new messages"),
                             s.enableSmoothScrollingNewMessages)
         ->addTo(layout);
 
-    SettingWidget::checkbox("Show input when it's empty", s.showEmptyInput)
+    SettingWidget::checkbox(this->tr("Show input when it's empty"), s.showEmptyInput)
         ->setTooltip("Show the chat box even when there is nothing typed.")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Show message length while typing",
+    SettingWidget::checkbox(this->tr("Show message length while typing"),
                             s.showMessageLength)
         ->setTooltip(
             "Show how many characters are currently in your input box.\n"
@@ -410,7 +410,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         ->addKeywords({"slowmode", "timeout"})
         ->addTo(layout);
 
-    SettingWidget::checkbox("Allow sending duplicate messages",
+    SettingWidget::checkbox(this->tr("Allow sending duplicate messages"),
                             s.allowDuplicateMessages)
         ->setTooltip(
             "Allow a single message to be repeatedly sent without any changes.")
@@ -516,7 +516,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
             "yours is successfully sent in the matching channel.")
         ->addTo(layout);
 
-    layout.addTitle("Messages");
+    layout.addTitle(this->tr("Messages"));
 
     SettingWidget::checkbox("Separate with lines", s.separateMessages)
         ->setTooltip(
@@ -535,7 +535,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
             "was started or while re-connecting.")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Hide deleted messages", s.hideModerated)
+    SettingWidget::checkbox(this->tr("Hide deleted messages"), s.hideModerated)
         ->setTooltip(
             "When enabled, messages deleted by moderators will be hidden.")
         ->addTo(layout);
@@ -652,7 +652,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
 
     SettingWidget::colorButton("Line color", s.lastMessageColor)->addTo(layout);
 
-    layout.addTitle("Emotes");
+    layout.addTitle(this->tr("Emotes"));
 
     SettingWidget::checkbox("Enable", s.enableEmoteImages)->addTo(layout);
 
@@ -734,7 +734,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
                             s.emoteTooltipScale)
         ->addTo(layout);
 
-    SettingWidget::dropdown("Emoji style", s.emojiSet)->addTo(layout);
+    SettingWidget::dropdown(this->tr("Emoji style"), s.emojiSet)->addTo(layout);
 
     SettingWidget::checkbox("Show BetterTTV global emotes",
                             s.enableBTTVGlobalEmotes)
@@ -787,7 +787,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         ->addKeywords({"seventv"})
         ->addTo(layout);
 
-    layout.addTitle("Streamer Mode");
+    layout.addTitle(this->tr("Streamer Mode"));
     layout.addDescription(
         "Chatterino can automatically change behavior if it detects that any "
         "streaming software is running.\nSelect which things you want to "
@@ -851,7 +851,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         ->setTooltip("Hide whispers sent to you from appearing in chat.")
         ->addTo(layout);
 
-    layout.addTitle("Link Previews");
+    layout.addTitle(this->tr("Link Previews"));
     layout.addDescription(
         "Extra information like \"youtube video stats\" or title of webpages "
         "can be loaded for all links if enabled. Optionally you can also show "
@@ -950,7 +950,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         });
 
     layout.addNavigationSpacing();
-    layout.addTitle("Beta");
+    layout.addTitle(this->tr("Beta"));
     if (Version::instance().isSupportedOS())
     {
         layout.addDescription(
@@ -968,7 +968,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
             "issues <a href='https://chatterino.com/link/issues'>here</a>.");
     }
 
-    layout.addTitle("Browser Integration");
+    layout.addTitle(this->tr("Browser Integration"));
 #ifdef Q_OS_WIN
     layout.addDescription(
         "The browser extension replaces the default "
@@ -1077,9 +1077,9 @@ void GeneralPage::initLayout(GeneralPageView &layout)
     }
 #endif
 
-    layout.addTitle("AppData & Cache");
+    layout.addTitle(this->tr("AppData & Cache"));
 
-    layout.addSubtitle("Application Data");
+    layout.addSubtitle(this->tr("Application Data"));
     layout.addDescription("All local files like settings and cache files are "
                           "stored in this directory.");
     layout.addButton("Open AppData directory", [] {
@@ -1091,7 +1091,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
 #endif
     });
 
-    layout.addSubtitle("Temporary files (Cache)");
+    layout.addSubtitle(this->tr("Temporary files (Cache)"));
     layout.addDescription(
         "Files that are used often (such as emotes) are saved to disk to "
         "reduce bandwidth usage and to speed up loading.");
@@ -1137,9 +1137,9 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         layout.addLayout(box);
     }
 
-    layout.addTitle("Sound");
+    layout.addTitle(this->tr("Sound"));
 
-    SettingWidget::dropdown("Sound backend (requires restart)", s.soundBackend)
+    SettingWidget::dropdown(this->tr("Sound backend (requires restart)"), s.soundBackend)
         ->setTooltip("Change this only if you're noticing issues with sound "
                      "playback on your system")
         ->addTo(layout);
@@ -1153,9 +1153,9 @@ void GeneralPage::initLayout(GeneralPageView &layout)
             "sleeping.")
         ->addTo(layout);
 
-    layout.addTitle("Advanced");
+    layout.addTitle(this->tr("Advanced"));
 
-    layout.addSubtitle("Chat title");
+    layout.addSubtitle(this->tr("Chat title"));
     layout.addDescription("In live channels show:");
     SettingWidget::checkbox("Uptime", s.headerUptime)
         ->setTooltip("Show how long the channel has been live")
@@ -1170,7 +1170,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         ->setTooltip("Show the stream title")
         ->addTo(layout);
 
-    layout.addSubtitle("Unique chat (R9K)");
+    layout.addSubtitle(this->tr("Unique chat (R9K)"));
     auto toggleLocalr9kSeq = getApp()->getHotkeys()->getDisplaySequence(
         HotkeyCategory::Window, "toggleLocalR9K");
     QString toggleLocalr9kShortcut =
@@ -1244,7 +1244,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         "establish its similarity rating. Messages in the history will be "
         "compared to only if they are new enough.");
 
-    layout.addSubtitle("Visible badges");
+    layout.addSubtitle(this->tr("Visible badges"));
     SettingWidget::checkbox("Authority", s.showBadgesGlobalAuthority)
         ->setTooltip("e.g. staff, admin")
         ->addTo(layout);
@@ -1288,7 +1288,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         ->addKeywords({"ffz"})
         ->addTo(layout);
 
-    layout.addSubtitle("Overlay");
+    layout.addSubtitle(this->tr("Overlay"));
     layout.addDropdown<float>(
         "Zoom factor", ZOOM_LEVELS, s.overlayScaleFactor,
         [](auto val) {
@@ -1372,7 +1372,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         ->addTo(layout);
 
     {
-        layout.addSubtitle("Search");
+        layout.addSubtitle(this->tr("Search"));
         layout.addDescription(
             "Search engine which appears when you select text and right-click "
             "a message. Select a search engine preset from the dropdown below, "
@@ -1446,7 +1446,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
             ->addTo(layout);
     }
 
-    layout.addSubtitle("Miscellaneous");
+    layout.addSubtitle(this->tr("Miscellaneous"));
 
     if (supportsIncognitoLinks())
     {

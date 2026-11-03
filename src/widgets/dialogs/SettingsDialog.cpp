@@ -53,6 +53,7 @@ SettingsDialog::SettingsDialog(QWidget *parent)
     this->setWindowFlags(this->windowFlags() &
                          ~Qt::WindowContextHelpButtonHint);
 
+    this->setAttribute(Qt::WA_DeleteOnClose);
     this->resize(915, 600);
 
     this->initUi();

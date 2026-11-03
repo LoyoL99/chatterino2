@@ -96,6 +96,10 @@ else()
     message(STATUS "LTO: Disabled")
 endif()
 
+if (MSVC)
+    add_compile_options(/utf-8)
+endif()
+
 if (BUILD_WITH_QT6)
     set(MAJOR_QT_VERSION "6")
 else()
