@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <QByteArray>
 #include <QObject>
 #include <QString>
 #include <QTranslator>
@@ -33,6 +34,7 @@ private:
 
     std::unique_ptr<QTranslator> appTranslator_;
     std::unique_ptr<QTranslator> qtTranslator_;
+    QByteArray appQmBytes_;
     QString currentLang_{"en"};
 };
 
