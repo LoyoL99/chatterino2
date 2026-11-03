@@ -425,8 +425,8 @@ UserInfoPopup::UserInfoPopup(bool closeAutomatically, Split *split)
 
         user.emplace<LabelButton>("Add notes", this)
             .assign(&this->ui_.notesAdd);
-        auto whisper = user.emplace<LabelButton>("Whisper", this);
-        auto usercard = user.emplace<LabelButton>("Usercard", this)
+        auto whisper = user.emplace<LabelButton>(this->tr("Whisper"), this);
+        auto usercard = user.emplace<LabelButton>(this->tr("Open profile"), this)
                             .assign(&this->ui_.usercardLabel);
         auto mod = user.emplace<PixmapButton>(this);
         mod->setPixmap(getResources().buttons.mod);
@@ -1328,9 +1328,9 @@ UserInfoPopup::TimeoutWidget::TimeoutWidget()
         }
     };
 
-    addButton(Unban, "Unban", getResources().buttons.unban);
-    addTimeouts("Timeouts");
-    addButton(Ban, "Ban", getResources().buttons.ban);
+    addButton(Unban, UserInfoPopup::tr("Unban"), getResources().buttons.unban);
+    addTimeouts(UserInfoPopup::tr("Timeout"));
+    addButton(Ban, UserInfoPopup::tr("Ban"), getResources().buttons.ban);
 }
 
 void UserInfoPopup::TimeoutWidget::paintEvent(QPaintEvent *)

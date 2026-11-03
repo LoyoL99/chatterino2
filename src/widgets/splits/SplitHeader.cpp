@@ -459,27 +459,27 @@ std::unique_ptr<QMenu> SplitHeader::createMainMenu()
     const auto &h = getApp()->getHotkeys();
     auto menu = std::make_unique<QMenu>();
     menu->addAction(
-        "Change channel",
+        this->tr("Change channel"),
         h->getDisplaySequence(HotkeyCategory::Split, "changeChannel"),
         this->split_, &Split::changeChannel);
-    menu->addAction("Close",
+    menu->addAction(this->tr("Close"),
                     h->getDisplaySequence(HotkeyCategory::Split, "delete"),
                     this->split_, &Split::deleteFromContainer);
     menu->addSeparator();
     menu->addAction(
-        "Popup",
+        this->tr("Popup"),
         h->getDisplaySequence(HotkeyCategory::Window, "popup", {{"split"}}),
         this->split_, &Split::popup);
     menu->addAction(
-        "Popup overlay",
+        this->tr("Popup overlay"),
         h->getDisplaySequence(HotkeyCategory::Split, "popupOverlay"),
         this->split_, &Split::showOverlayWindow);
-    menu->addAction(u"Search…"_s,
+    menu->addAction(this->tr("Search..."),
                     h->getDisplaySequence(HotkeyCategory::Split, "showSearch"),
                     this->split_, [this] {
                         this->split_->showSearch(true);
                     });
-    menu->addAction(u"Set filters…"_s,
+    menu->addAction(this->tr("Set filters..."),
                     h->getDisplaySequence(HotkeyCategory::Split, "pickFilters"),
                     this->split_, &Split::setFiltersDialog);
     menu->addSeparator();
@@ -490,21 +490,21 @@ std::unique_ptr<QMenu> SplitHeader::createMainMenu()
     if (twitchChannel)
     {
         menu->addAction(
-            OPEN_IN_BROWSER,
+            this->tr("Open in browser"),
             h->getDisplaySequence(HotkeyCategory::Split, "openInBrowser"),
             this->split_, &Split::openInBrowser);
         menu->addAction(
-            OPEN_PLAYER_IN_BROWSER,
+            this->tr("Open player in browser"),
             h->getDisplaySequence(HotkeyCategory::Split, "openPlayerInBrowser"),
             this->split_, &Split::openBrowserPlayer);
         menu->addAction(
-            OPEN_IN_STREAMLINK,
+            this->tr("Open in streamlink"),
             h->getDisplaySequence(HotkeyCategory::Split, "openInStreamlink"),
             this->split_, &Split::openInStreamlink);
 
         if (!getSettings()->customURIScheme.getValue().isEmpty())
         {
-            menu->addAction("Open in custom player",
+            menu->addAction(this->tr("Open in custom player"),
                             h->getDisplaySequence(HotkeyCategory::Split,
                                                   "openInCustomPlayer"),
                             this->split_, &Split::openWithCustomScheme);
@@ -513,14 +513,14 @@ std::unique_ptr<QMenu> SplitHeader::createMainMenu()
         if (this->split_->getChannel()->hasModRights())
         {
             menu->addAction(
-                OPEN_MOD_VIEW_IN_BROWSER,
+                this->tr("Open mod view in browser"),
                 h->getDisplaySequence(HotkeyCategory::Split, "openModView"),
                 this->split_, &Split::openModViewInBrowser);
         }
     }
 
     menu->addAction(
-        "Followed channels",
+        this->tr("Followed channels"),
         h->getDisplaySequence(HotkeyCategory::Window, "openFollowedChannels"),
         this, [this] {
             auto *window = dynamic_cast<Window *>(this->window());
@@ -608,7 +608,7 @@ std::unique_ptr<QMenu> SplitHeader::createMainMenu()
     menu->addSeparator();
 
     // sub menu
-    auto *moreMenu = new QMenu("More", this);
+    auto *moreMenu = new QMenu(this->tr("More"), this);
 
     auto modModeSeq = h->getDisplaySequence(HotkeyCategory::Split,
                                             "setModerationMode", {{"toggle"}});
@@ -718,7 +718,7 @@ std::unique_ptr<QMenu> SplitHeader::createMainMenu()
 
     moreMenu->addSeparator();
     moreMenu->addAction(
-        "Clear messages",
+        this->tr("Clear chat"),
         h->getDisplaySequence(HotkeyCategory::Split, "clearMessages"),
         this->split_, &Split::clear);
     //    moreMenu->addSeparator();

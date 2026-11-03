@@ -775,22 +775,22 @@ void Window::addMenuBar()
     });
 
     // Window menu.
-    QMenu *windowMenu = mainMenu->addMenu(QString("Window"));
+    QMenu *windowMenu = mainMenu->addMenu(this->tr("Window"));
 
     // Window->Minimize item
-    QAction *minimizeWindow = windowMenu->addAction(QString("Minimize"));
+    QAction *minimizeWindow = windowMenu->addAction(this->tr("Minimize"));
     minimizeWindow->setShortcuts({QKeySequence("Meta+M")});
     connect(minimizeWindow, &QAction::triggered, this, [this] {
         this->setWindowState(Qt::WindowMinimized);
     });
 
-    QAction *nextTab = windowMenu->addAction(QString("Select next tab"));
+    QAction *nextTab = windowMenu->addAction(this->tr("Select next tab"));
     nextTab->setShortcuts({QKeySequence("Meta+Tab")});
     connect(nextTab, &QAction::triggered, this, [this] {
         this->notebook_->selectNextTab();
     });
 
-    QAction *prevTab = windowMenu->addAction(QString("Select previous tab"));
+    QAction *prevTab = windowMenu->addAction(this->tr("Select previous tab"));
     prevTab->setShortcuts({QKeySequence("Meta+Shift+Tab")});
     connect(prevTab, &QAction::triggered, this, [this] {
         this->notebook_->selectPreviousTab();

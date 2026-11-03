@@ -75,7 +75,7 @@ Notebook::Notebook(QWidget *parent)
             page->insertSplit(draggedSplit);
         });
 
-    this->lockNotebookLayoutAction_ = new QAction("Lock Tab Layout", this);
+    this->lockNotebookLayoutAction_ = new QAction(this->tr("Lock layout"), this);
     this->lockNotebookLayoutAction_->setCheckable(true);
     this->lockNotebookLayoutAction_->setChecked(this->lockNotebookLayout_);
 
@@ -1397,7 +1397,7 @@ SplitNotebook::SplitNotebook(Window *parent)
     tabVisibilityActionGroup->setExclusionPolicy(
         QActionGroup::ExclusionPolicy::Exclusive);
 
-    this->showAllTabsAction = new QAction("Show all tabs", this);
+    this->showAllTabsAction = new QAction(this->tr("All tabs"), this);
     this->showAllTabsAction->setCheckable(true);
     this->showAllTabsAction->setShortcut(
         getApp()->getHotkeys()->getDisplaySequence(
@@ -1411,7 +1411,7 @@ SplitNotebook::SplitNotebook(Window *parent)
                      });
     tabVisibilityActionGroup->addAction(this->showAllTabsAction);
 
-    this->onlyShowLiveTabsAction = new QAction("Only show live tabs", this);
+    this->onlyShowLiveTabsAction = new QAction(this->tr("Only show live tabs"), this);
     this->onlyShowLiveTabsAction->setCheckable(true);
     this->onlyShowLiveTabsAction->setShortcut(
         getApp()->getHotkeys()->getDisplaySequence(
@@ -1425,7 +1425,7 @@ SplitNotebook::SplitNotebook(Window *parent)
                      });
     tabVisibilityActionGroup->addAction(this->onlyShowLiveTabsAction);
 
-    this->hideAllTabsAction = new QAction("Hide all tabs", this);
+    this->hideAllTabsAction = new QAction(this->tr("Hide all tabs"), this);
     this->hideAllTabsAction->setCheckable(true);
     this->hideAllTabsAction->setShortcut(
         getApp()->getHotkeys()->getDisplaySequence(
@@ -1440,7 +1440,7 @@ SplitNotebook::SplitNotebook(Window *parent)
     tabVisibilityActionGroup->addAction(this->hideAllTabsAction);
 
     this->sortTabsAlphabeticallyAction_ =
-        new QAction("Sort Tabs Alphabetically", this);
+        new QAction(this->tr("Sort tabs alphabetically"), this);
     if (this->isNotebookLayoutLocked())
     {
         this->sortTabsAlphabeticallyAction_->setEnabled(false);
@@ -1549,7 +1549,7 @@ void SplitNotebook::addNotebookActionsToMenu(QMenu *menu)
 
     menu->addAction(this->sortTabsAlphabeticallyAction_);
 
-    auto *submenu = menu->addMenu("Tab visibility");
+    auto *submenu = menu->addMenu(this->tr("Tab visibility"));
     submenu->addAction(this->showAllTabsAction);
     submenu->addAction(this->onlyShowLiveTabsAction);
     submenu->addAction(this->hideAllTabsAction);

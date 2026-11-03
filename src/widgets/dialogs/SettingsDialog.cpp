@@ -47,7 +47,7 @@ SettingsDialog::SettingsDialog(QWidget *parent)
           parent)
 {
     this->setObjectName("SettingsDialog");
-    this->setWindowTitle("Chatterino Settings");
+    this->setWindowTitle(this->tr("Chatterino Settings"));
     this->setWindowRole(u"chatterino.settings"_s);
     // Disable the ? button in the titlebar until we decide to use it
     this->setWindowFlags(this->windowFlags() &
@@ -148,9 +148,9 @@ void SettingsDialog::initUi()
     auto buttons = outerBox.emplace<QDialogButtonBox>(Qt::Horizontal);
     {
         this->ui_.okButton =
-            buttons->addButton("Ok", QDialogButtonBox::YesRole);
+            buttons->addButton(this->tr("Ok"), QDialogButtonBox::YesRole);
         this->ui_.cancelButton =
-            buttons->addButton("Cancel", QDialogButtonBox::NoRole);
+            buttons->addButton(this->tr("Cancel"), QDialogButtonBox::NoRole);
     }
 
     // ---- misc
@@ -236,25 +236,25 @@ void SettingsDialog::addTabs()
     // Constructors are wrapped in std::function to remove some strain from first time loading.
 
     // clang-format off
-    this->addTab([]{return new GeneralPage;},          "General",        ":/settings/about.svg", SettingsTabId::General);
+    this->addTab([]{return new GeneralPage;},          this->tr("General"),        ":/settings/about.svg", SettingsTabId::General);
     this->ui_.tabContainer->addSpacing(16);
-    this->addTab([]{return new AccountsPage;},         "Accounts",       ":/settings/accounts.svg", SettingsTabId::Accounts);
-    this->addTab([]{return new NicknamesPage;},        "Nicknames",      ":/settings/accounts.svg");
+    this->addTab([]{return new AccountsPage;},         this->tr("Accounts"),       ":/settings/accounts.svg", SettingsTabId::Accounts);
+    this->addTab([]{return new NicknamesPage;},        this->tr("Nicknames"),      ":/settings/accounts.svg");
     this->ui_.tabContainer->addSpacing(16);
-    this->addTab([]{return new CommandPage;},          "Commands",       ":/settings/commands.svg");
-    this->addTab([]{return new HighlightingPage;},     "Highlights",     ":/settings/notifications.svg", SettingsTabId::Highlights);
-    this->addTab([]{return new IgnoresPage;},          "Ignores",        ":/settings/ignore.svg");
-    this->addTab([]{return new FiltersPage;},          "Filters",        ":/settings/filters.svg");
+    this->addTab([]{return new CommandPage;},          this->tr("Commands"),       ":/settings/commands.svg");
+    this->addTab([]{return new HighlightingPage;},     this->tr("Highlights"),     ":/settings/notifications.svg", SettingsTabId::Highlights);
+    this->addTab([]{return new IgnoresPage;},          this->tr("Ignores"),        ":/settings/ignore.svg");
+    this->addTab([]{return new FiltersPage;},          this->tr("Filters"),        ":/settings/filters.svg");
     this->ui_.tabContainer->addSpacing(16);
-    this->addTab([]{return new KeyboardSettingsPage;}, "Hotkeys",        ":/settings/keybinds.svg");
-    this->addTab([]{return new ModerationPage;},       "Moderation",     ":/settings/moderation.svg", SettingsTabId::Moderation);
-    this->addTab([]{return new NotificationPage;},     "Live Notifications",  ":/settings/notification2.svg");
-    this->addTab([]{return new ExternalToolsPage;},    "External tools", ":/settings/externaltools.svg");
+    this->addTab([]{return new KeyboardSettingsPage;}, this->tr("Hotkeys"),        ":/settings/keybinds.svg");
+    this->addTab([]{return new ModerationPage;},       this->tr("Moderation"),     ":/settings/moderation.svg", SettingsTabId::Moderation);
+    this->addTab([]{return new NotificationPage;},     this->tr("Live Notifications"),  ":/settings/notification2.svg");
+    this->addTab([]{return new ExternalToolsPage;},    this->tr("External tools"), ":/settings/externaltools.svg");
 #ifdef CHATTERINO_HAVE_PLUGINS
-    this->addTab([]{return new PluginsPage;},          "Plugins",        ":/settings/plugins.svg");
+    this->addTab([]{return new PluginsPage;},          this->tr("Plugins"),        ":/settings/plugins.svg");
 #endif
     this->ui_.tabContainer->addStretch(1);
-    this->addTab([]{return new AboutPage;},            "About",          ":/settings/about.svg", SettingsTabId::About, Qt::AlignBottom);
+    this->addTab([]{return new AboutPage;},            this->tr("About"),          ":/settings/about.svg", SettingsTabId::About, Qt::AlignBottom);
     // clang-format on
 }
 
