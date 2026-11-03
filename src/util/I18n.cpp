@@ -6,6 +6,7 @@
 
 #include <QCoreApplication>
 #include <QDebug>
+#include <QFile>
 #include <QLibraryInfo>
 
 #include <memory>
@@ -39,15 +40,36 @@ bool I18n::loadLanguage(const QString &langCode)
     }
 
     auto appTrans = std::make_unique<QTranslator>();
-    if (appTrans->load(
-            QString(":/translations/chatterino_%1.qm").arg(langCode)))
+    QString resPath = QString(":/translations/chatterino_%1.qm").arg(langCode);
+    QFile resFile(resPath);
+    bool loaded = false;
+
+    if (resFile.open(QIODevice::ReadOnly))
+    {
+        auto qmData = resFile.readAll();
+        loaded = appTrans->load(
+            reinterpret_cast<const uchar *>(qmData.constData()), qmData.size());
+        if (!loaded)
+        {
+            qWarning() << "Failed to parse translation from raw bytes for"
+                       << langCode;
+        }
+    }
+
+    if (!loaded)
+    {
+        loaded = appTrans->load(resPath);
+    }
+
+    if (loaded)
     {
         QCoreApplication::installTranslator(appTrans.get());
         this->appTranslator_ = std::move(appTrans);
     }
     else
     {
-        qWarning() << "Failed to load translation for" << langCode;
+        qWarning() << "Failed to load translation resource for" << langCode
+                   << "from" << resPath;
     }
 
     auto qtTrans = std::make_unique<QTranslator>();

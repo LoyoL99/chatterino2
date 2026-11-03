@@ -15,6 +15,7 @@
 #include "singletons/Settings.hpp"
 #include "singletons/Updates.hpp"
 #include "util/CombinePath.hpp"
+#include "util/I18n.hpp"
 #include "util/SelfCheck.hpp"
 #include "util/UnixSignalHandler.hpp"
 #include "widgets/dialogs/LastRunCrashDialog.hpp"
@@ -247,6 +248,7 @@ void runGui(QApplication &a, const Modes &modes, const Paths &paths,
 {
     initQt(args);
     initResources();
+    I18n::instance().loadLanguage(settings.uiLanguage.getValue());
     initSignalHandler();
 
 #ifdef Q_OS_WIN

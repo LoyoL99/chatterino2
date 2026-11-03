@@ -40,6 +40,8 @@ enum class SettingsDialogPreference {
 
 class SettingsDialog : public BaseWindow
 {
+    Q_OBJECT
+
     SettingsDialog(QWidget *parent);
 
 public:

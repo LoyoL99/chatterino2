@@ -164,9 +164,9 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         [](const QString &val) -> std::variant<int, QString> {
             if (val == "en")
             {
-                return QString("English");
+                return 1;
             }
-            return QString("Русский");
+            return 0;
         },
         [](DropdownArgs args) -> QString {
             if (args.index == 1 || args.value == "English")
