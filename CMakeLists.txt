@@ -148,10 +148,27 @@ find_package(Qt${MAJOR_QT_VERSION} REQUIRED
     Network
     Svg
     Concurrent
+    OPTIONAL_COMPONENTS
+    LinguistTools
     )
 if(CHATTERINO_ALLOW_PRIVATE_QT_API)
     # Only exists since 6.10 and prints a warning regarding private headers
     find_package(Qt${MAJOR_QT_VERSION} COMPONENTS GuiPrivate)
+endif()
+
+if (TARGET Qt${MAJOR_QT_VERSION}::lrelease)
+    add_custom_command(
+        OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/resources/translations/chatterino_ru.qm"
+        COMMAND Qt${MAJOR_QT_VERSION}::lrelease
+            "${CMAKE_CURRENT_SOURCE_DIR}/resources/translations/chatterino_ru.ts"
+            -qm "${CMAKE_CURRENT_SOURCE_DIR}/resources/translations/chatterino_ru.qm"
+        DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/resources/translations/chatterino_ru.ts"
+        COMMENT "Compiling chatterino_ru.ts into chatterino_ru.qm"
+        VERBATIM
+    )
+    add_custom_target(translations ALL
+        DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/resources/translations/chatterino_ru.qm"
+    )
 endif()
 
 message(STATUS "Qt version: ${Qt${MAJOR_QT_VERSION}_VERSION}")
@@ -286,6 +303,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include(cmake/resources/generate_resources.cmake)
 
 add_subdirectory(src)
+
+if (TARGET translations AND TARGET chatterino-lib)
+    add_dependencies(chatterino-lib translations)
+endif()
 
 if (BUILD_TESTS OR BUILD_BENCHMARKS)
     add_subdirectory(mocks)
