@@ -159,6 +159,24 @@ void GeneralPage::initLayout(GeneralPageView &layout)
             ->addTo(layout);
     }
 
+    layout.addDropdown<QString>(
+        "Language / Язык", {"Русский", "English"}, s.uiLanguage,
+        [](const QString &val) -> std::variant<int, QString> {
+            if (val == "en")
+            {
+                return QString("English");
+            }
+            return QString("Русский");
+        },
+        [](DropdownArgs args) -> QString {
+            if (args.index == 1 || args.value == "English")
+            {
+                return "en";
+            }
+            return "ru";
+        },
+        false);
+
     layout.addDropdown<float>(
         "Zoom", ZOOM_LEVELS, s.uiScale,
         [](auto val) {

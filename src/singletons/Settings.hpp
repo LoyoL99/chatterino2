@@ -167,6 +167,9 @@ public:
     float getClampedUiScale() const;
     void setClampedUiScale(float value);
 
+    /// General
+    QStringSetting uiLanguage = {"/general/uiLanguage", "ru"};
+
     /// Appearance
     BoolSetting showTimestamps = {"/appearance/messages/showTimestamps", true};
     BoolSetting showHeaderTimestamps = {
