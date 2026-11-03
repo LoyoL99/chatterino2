@@ -62,6 +62,7 @@
 #include "singletons/Updates.hpp"
 #include "singletons/WindowManager.hpp"
 #include "util/Helpers.hpp"
+#include "util/I18n.hpp"
 #include "util/PostToThread.hpp"
 #include "widgets/Notebook.hpp"
 #include "widgets/splits/Split.hpp"
@@ -212,6 +213,9 @@ Application::~Application()
 void Application::initialize(Settings &settings, const Paths &paths)
 {
     assert(!this->initialized);
+
+    // Initialize localization
+    I18n::instance().loadLanguage("ru");
 
     // Show changelog
     if (!this->args_.isFramelessEmbed &&

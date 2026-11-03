@@ -620,6 +620,8 @@ set(SOURCE_FILES
         util/FuzzyConvert.hpp
         util/Helpers.cpp
         util/Helpers.hpp
+        util/I18n.cpp
+        util/I18n.hpp
         util/ImageUploader.cpp
         util/ImageUploader.hpp
         util/IncognitoBrowser.cpp
