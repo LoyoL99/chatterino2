@@ -118,7 +118,7 @@ void ExternalToolsPage::initLayout(GeneralPageView &layout)
 
     {
         auto *form = new QFormLayout;
-        layout.addTitle("Streamlink");
+        layout.addTitle(this->tr("Streamlink"));
         layout.addDescription("Streamlink is a command-line utility that pipes "
                               "video streams from "
                               "various services into a video player, such as "
@@ -134,8 +134,8 @@ void ExternalToolsPage::initLayout(GeneralPageView &layout)
             formatRichNamedLink("https://streamlink.github.io/cli.html#twitch",
                                 "Documentation"));
 
-        SettingWidget::checkbox("Use custom path (Enable if using non-standard "
-                                "streamlink installation path)",
+        SettingWidget::checkbox(this->tr("Use custom path (Enable if using non-standard "
+                                "streamlink installation path)"),
                                 s.streamlinkUseCustomPath)
             ->addTo(layout);
 
@@ -147,20 +147,20 @@ void ExternalToolsPage::initLayout(GeneralPageView &layout)
         layout.addLayout(form);
 
         SettingWidget::lineEdit(
-            "Custom streamlink path", s.streamlinkPath,
+            this->tr("Custom streamlink path"), s.streamlinkPath,
             "Path to folder where Streamlink executable can be found")
             ->conditionallyEnabledBy(s.streamlinkUseCustomPath)
             ->addTo(layout, form);
 
-        SettingWidget::dropdown("Preferred quality", s.preferredQuality)
+        SettingWidget::dropdown(this->tr("Preferred quality"), s.preferredQuality)
             ->addTo(layout, form);
 
-        SettingWidget::lineEdit("Additional options", s.streamlinkOpts, "")
+        SettingWidget::lineEdit(this->tr("Additional options"), s.streamlinkOpts, "")
             ->addTo(layout, form);
     }
 
     {
-        layout.addTitle("Custom stream player");
+        layout.addTitle(this->tr("Custom stream player"));
         layout.addDescription(
             "You can open Twitch streams directly in any video player that has "
             "built-in Twitch support and its own URI Scheme.\nE.g.: IINA for "
@@ -168,14 +168,14 @@ void ExternalToolsPage::initLayout(GeneralPageView &layout)
             "value set, you will get the option to \"Open in custom player\" "
             "when right-clicking a channel header.");
 
-        SettingWidget::lineEdit("Custom stream player URI Scheme",
+        SettingWidget::lineEdit(this->tr("Custom stream player URI Scheme"),
                                 s.customURIScheme, "custom-player-scheme://")
             ->addTo(layout);
     }
 
     {
         auto *form = new QFormLayout;
-        layout.addTitle("Image Uploader");
+        layout.addTitle(this->tr("Image Uploader"));
 
         layout.addDescription(
             "You can set custom host for uploading images, like imgur.com or "
@@ -215,7 +215,7 @@ void ExternalToolsPage::initLayout(GeneralPageView &layout)
 
         auto *buttonLayout = new QHBoxLayout;
 
-        auto *importButton = new QPushButton("Import Settings from Clipboard");
+        auto *importButton = new QPushButton(this->tr("Import Settings from Clipboard"));
         importButton->setToolTip(
             "Import image uploader settings from clipboard JSON");
         QObject::connect(importButton, &QPushButton::clicked, [this]() {
@@ -223,7 +223,7 @@ void ExternalToolsPage::initLayout(GeneralPageView &layout)
         });
         buttonLayout->addWidget(importButton);
 
-        auto *exportButton = new QPushButton("Export Settings to Clipboard");
+        auto *exportButton = new QPushButton(this->tr("Export Settings to Clipboard"));
         exportButton->setToolTip(
             "Copy current image uploader settings to clipboard as JSON");
         QObject::connect(exportButton, &QPushButton::clicked, [this]() {
@@ -238,7 +238,7 @@ void ExternalToolsPage::initLayout(GeneralPageView &layout)
 #ifdef CHATTERINO_WITH_SPELLCHECK
     {
         // auto *form = new QFormLayout;
-        layout.addTitle("Spell checker (experimental)");
+        layout.addTitle(this->tr("Spell checker (experimental)"));
 
         layout.addDescription(
             u"Check the spelling of words in the input box of splits."

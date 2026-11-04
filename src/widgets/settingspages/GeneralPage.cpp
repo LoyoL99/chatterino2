@@ -146,7 +146,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         SettingWidget::dropdown(this->tr("Dark system theme"),
                                 themes->darkSystemThemeName,
                                 themes->availableThemes())
-            ->setTooltip("This theme is selected if your system is in a dark "
+            ->setTooltip(this->tr("This theme is selected if your system is in a dark ")
                          "theme and you enabled the adaptive 'System' theme.")
             ->conditionallyEnabledBy(themes->themeName, "System")
             ->addTo(layout);
@@ -154,7 +154,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         SettingWidget::dropdown(this->tr("Light system theme"),
                                 themes->lightSystemThemeName,
                                 themes->availableThemes())
-            ->setTooltip("This theme is selected if your system is in a light "
+            ->setTooltip(this->tr("This theme is selected if your system is in a light ")
                          "theme and you enabled the adaptive 'System' theme.")
             ->conditionallyEnabledBy(themes->themeName, "System")
             ->addTo(layout);
@@ -259,7 +259,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
 
     SettingWidget::dropdown(this->tr("Tab style"), s.tabStyle)->addTo(layout);
     SettingWidget::checkbox(this->tr("Extend wrapped tabs"), s.growWrappedNotebookLines)
-        ->setTooltip("When horizontal tabs are wrapped, extend the line for "
+        ->setTooltip(this->tr("When horizontal tabs are wrapped, extend the line for ")
                      "the whole width of the window.")
         ->addTo(layout);
 
@@ -270,12 +270,12 @@ void GeneralPage::initLayout(GeneralPageView &layout)
     SettingWidget::inverseCheckbox(this->tr("Show message reply context"),
                                    s.hideReplyContext)
         ->setTooltip(
-            "This setting will only affect how messages are shown. You can "
+            this->tr("This setting will only affect how messages are shown. You can ")
             "reply to a message regardless of this setting.")
         ->addTo(layout);
 
     SettingWidget::checkbox(this->tr("Show message reply button"), s.showReplyButton)
-        ->setTooltip("Show a reply button next to every chat message")
+        ->setTooltip(this->tr("Show a reply button next to every chat message"))
         ->addTo(layout);
 
     auto removeTabSeq = getApp()->getHotkeys()->getDisplaySequence(
@@ -289,18 +289,18 @@ void GeneralPage::initLayout(GeneralPageView &layout)
 
     SettingWidget::checkbox(this->tr("Show tab close button"), s.showTabCloseButton)
         ->setTooltip(
-            "When disabled, the x to close a tab will be hidden.\nTabs can "
+            this->tr("When disabled, the x to close a tab will be hidden.\nTabs can ")
             "still be closed by right-clicking or pressing " +
             removeTabShortcut + ".")
         ->addTo(layout);
 
     SettingWidget::checkbox(this->tr("Always on top"), s.windowTopMost)
-        ->setTooltip("Always keep Chatterino as the top window.")
+        ->setTooltip(this->tr("Always keep Chatterino as the top window."))
         ->addTo(layout);
 
 #ifdef USEWINSDK
     SettingWidget::checkbox(this->tr("Start with Windows"), s.autorun)
-        ->setTooltip("Start Chatterino when your computer starts.")
+        ->setTooltip(this->tr("Start Chatterino when your computer starts."))
         ->addTo(layout);
 #endif
     if (!BaseWindow::supportsCustomWindowFrame())
@@ -325,14 +325,14 @@ void GeneralPage::initLayout(GeneralPageView &layout)
     }
 
     SettingWidget::checkbox(this->tr("Mark tabs with live channels"), s.showTabLive)
-        ->setTooltip("Shows a red dot in the top right corner of a tab to "
+        ->setTooltip(this->tr("Shows a red dot in the top right corner of a tab to ")
                      "indicate one of the channels in the tab is live.")
         ->addTo(layout);
 
     layout.addTitle(this->tr("Chat"));
 
     layout.addDropdown<float>(
-        "Pause on mouse hover",
+        this->tr("Pause on mouse hover"),
         {"Disabled", "0.5s", "1s", "2s", "5s", "Indefinite"},
         s.pauseOnHoverDuration,
         [](auto val) {
@@ -367,7 +367,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
     addKeyboardModifierSetting(layout, "Pause while holding a key",
                                s.pauseChatModifier);
     layout.addDropdown<float>(
-        "Mousewheel scroll speed", {"0.5x", "0.75x", "Default", "1.5x", "2x"},
+        this->tr("Mousewheel scroll speed"), {"0.5x", "0.75x", "Default", "1.5x", "2x"},
         s.mouseScrollMultiplier,
         [](auto val) {
             if (val == 1)
@@ -391,20 +391,20 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         ->addTo(layout);
 
     SettingWidget::checkbox(this->tr("Show input when it's empty"), s.showEmptyInput)
-        ->setTooltip("Show the chat box even when there is nothing typed.")
+        ->setTooltip(this->tr("Show the chat box even when there is nothing typed."))
         ->addTo(layout);
 
     SettingWidget::checkbox(this->tr("Show message length while typing"),
                             s.showMessageLength)
         ->setTooltip(
-            "Show how many characters are currently in your input box.\n"
+            this->tr("Show how many characters are currently in your input box.\n")
             "Useful for making sure you don't go past the 500 character Twitch "
             "limit, or a lower limit enforced by a moderation bot")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Show countdown on slow mode or when timed out",
+    SettingWidget::checkbox(this->tr("Show countdown on slow mode or when timed out"),
                             s.showSendWaitTimer)
-        ->setTooltip("Show how long you may need to wait before being able to "
+        ->setTooltip(this->tr("Show how long you may need to wait before being able to ")
                      "send in a Twitch channel again if the channel is in slow "
                      "mode or if you have been timed out")
         ->addKeywords({"slowmode", "timeout"})
@@ -413,11 +413,12 @@ void GeneralPage::initLayout(GeneralPageView &layout)
     SettingWidget::checkbox(this->tr("Allow sending duplicate messages"),
                             s.allowDuplicateMessages)
         ->setTooltip(
-            "Allow a single message to be repeatedly sent without any changes.")
+            this->tr("Allow a single message to be repeatedly sent without any changes."))
         ->addTo(layout);
 
     layout.addDropdown<std::underlying_type_t<MessageOverflow>>(
-        "Message overflow", {"Highlight", "Prevent", "Allow"},
+        this->tr("Message overflow"),
+        {this->tr("Highlight"), this->tr("Prevent"), this->tr("Allow")},
         s.messageOverflow,
         [](auto index) {
             return static_cast<int>(index);
@@ -426,14 +427,14 @@ void GeneralPage::initLayout(GeneralPageView &layout)
             return static_cast<MessageOverflow>(args.index);
         },
         false,
-        "Specify how Chatterino will handle messages that exceed Twitch "
-        "message limits");
+        this->tr("Specify how Chatterino will handle messages that exceed Twitch "
+                 "message limits"));
     layout.addDropdown<std::underlying_type_t<UsernameRightClickBehavior>>(
-        "Username right-click behavior",
+        this->tr("Username right-click behavior"),
         {
-            "Reply",
-            "Mention",
-            "Ignore",
+            this->tr("Reply"),
+            this->tr("Mention"),
+            this->tr("Ignore"),
         },
         s.usernameRightClickBehavior,
         [](auto index) {
@@ -443,14 +444,14 @@ void GeneralPage::initLayout(GeneralPageView &layout)
             return static_cast<UsernameRightClickBehavior>(args.index);
         },
         false,
-        "Specify how Chatterino will handle right-clicking a username in "
-        "chat when not holding the modifier.");
+        this->tr("Specify how Chatterino will handle right-clicking a username in "
+                 "chat when not holding the modifier."));
     layout.addDropdown<std::underlying_type_t<UsernameRightClickBehavior>>(
-        "Username right-click with modifier behavior",
+        this->tr("Username right-click with modifier behavior"),
         {
-            "Reply",
-            "Mention",
-            "Ignore",
+            this->tr("Reply"),
+            this->tr("Mention"),
+            this->tr("Ignore"),
         },
         s.usernameRightClickModifierBehavior,
         [](auto index) {
@@ -460,11 +461,12 @@ void GeneralPage::initLayout(GeneralPageView &layout)
             return static_cast<UsernameRightClickBehavior>(args.index);
         },
         false,
-        "Specify how Chatterino will handle right-clicking a username in "
-        "chat when holding down the modifier.");
+        this->tr("Specify how Chatterino will handle right-clicking a username in "
+                 "chat when holding down the modifier."));
     layout.addDropdown<std::underlying_type_t<Qt::KeyboardModifier>>(
-        "Modifier for alternate right-click action",
-        {"Shift", "Control", "Alt", META_KEY}, s.usernameRightClickModifier,
+        this->tr("Modifier for alternate right-click action"),
+        {this->tr("Shift"), this->tr("Control"), this->tr("Alt"), META_KEY},
+        s.usernameRightClickModifier,
         [](int index) {
             switch (index)
             {
@@ -497,60 +499,60 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         },
         false);
 
-    SettingWidget::checkbox("Hide scrollbar thumb", s.hideScrollbarThumb)
-        ->setTooltip("Hiding the scrollbar thumb (the handle you can drag) "
+    SettingWidget::checkbox(this->tr("Hide scrollbar thumb"), s.hideScrollbarThumb)
+        ->setTooltip(this->tr("Hiding the scrollbar thumb (the handle you can drag) ")
                      "will disable all mouse interaction in the scrollbar.")
         ->addKeywords({"scroll bar"})
         ->addTo(layout);
 
-    SettingWidget::checkbox("Hide scrollbar highlights",
+    SettingWidget::checkbox(this->tr("Hide scrollbar highlights"),
                             s.hideScrollbarHighlights)
         ->addKeywords({"scroll bar"})
         ->addTo(layout);
 
     SettingWidget::checkbox(
-        "Pulse text input when one of your messages is successfully sent",
+        this->tr("Pulse text input when one of your messages is successfully sent"),
         s.pulseTextInputOnSelfMessage)
         ->setTooltip(
-            "Pulses the text input in a green color whenever a message of "
+            this->tr("Pulses the text input in a green color whenever a message of ")
             "yours is successfully sent in the matching channel.")
         ->addTo(layout);
 
     layout.addTitle(this->tr("Messages"));
 
-    SettingWidget::checkbox("Separate with lines", s.separateMessages)
+    SettingWidget::checkbox(this->tr("Separate with lines"), s.separateMessages)
         ->setTooltip(
-            "Adds a line between each message to help better tell them apart.")
+            this->tr("Adds a line between each message to help better tell them apart."))
         ->addTo(layout);
 
-    SettingWidget::checkbox("Alternate background color", s.alternateMessages)
-        ->setTooltip("Slightly change the background behind every other "
+    SettingWidget::checkbox(this->tr("Alternate background color"), s.alternateMessages)
+        ->setTooltip(this->tr("Slightly change the background behind every other ")
                      "message to help better tell them apart.")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Reduce opacity of message history",
+    SettingWidget::checkbox(this->tr("Reduce opacity of message history"),
                             s.fadeMessageHistory)
         ->setTooltip(
-            "Reduce opacity of messages that were posted before Chatterino "
+            this->tr("Reduce opacity of messages that were posted before Chatterino ")
             "was started or while re-connecting.")
         ->addTo(layout);
 
     SettingWidget::checkbox(this->tr("Hide deleted messages"), s.hideModerated)
         ->setTooltip(
-            "When enabled, messages deleted by moderators will be hidden.")
+            this->tr("When enabled, messages deleted by moderators will be hidden."))
         ->addTo(layout);
 
-    SettingWidget::checkbox("Hide message timestamps when channel is live",
+    SettingWidget::checkbox(this->tr("Hide message timestamps when channel is live"),
                             s.hideMessageTimestampsWhenLive)
         ->addTo(layout);
 
-    SettingWidget::checkbox("Correct ASCII art wrapping", s.wrapAsciiArt)
-        ->setTooltip("Limit the width of messages containing ASCII art to "
+    SettingWidget::checkbox(this->tr("Correct ASCII art wrapping"), s.wrapAsciiArt)
+        ->setTooltip(this->tr("Limit the width of messages containing ASCII art to ")
                      "match the width of Twitch web chat.")
         ->addTo(layout);
 
     auto *timestampFormatDropdown = layout.addDropdown<QString>(
-        "Message timestamp format",
+        this->tr("Message timestamp format"),
         {"Disable", "h:mm", "hh:mm", "h:mm a", "hh:mm a", "h:mm:ss", "hh:mm:ss",
          "h:mm:ss a", "hh:mm:ss a", "h:mm:ss.zzz", "h:mm:ss.zzz a",
          "hh:mm:ss.zzz", "hh:mm:ss.zzz a"},
@@ -569,27 +571,27 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         true, "a = am/pm, zzz = milliseconds");
     timestampFormatDropdown->completer()->setCaseSensitivity(Qt::CaseSensitive);
 
-    SettingWidget::checkbox("Show header timestamps", s.showHeaderTimestamps)
+    SettingWidget::checkbox(this->tr("Show header timestamps"), s.showHeaderTimestamps)
         ->addTo(layout);
 
-    SettingWidget::checkbox("Show announcement header",
+    SettingWidget::checkbox(this->tr("Show announcement header"),
                             s.showAnnouncementHeader)
         ->addTo(layout);
 
-    SettingWidget::checkbox("Show subscription header",
+    SettingWidget::checkbox(this->tr("Show subscription header"),
                             s.showSubscriptionHeader)
         ->addTo(layout);
 
-    SettingWidget::checkbox("Show watch streak header", s.showWatchStreakHeader)
+    SettingWidget::checkbox(this->tr("Show watch streak header"), s.showWatchStreakHeader)
         ->addTo(layout);
 
-    SettingWidget::checkbox("Show Twitch GIFs", s.showTwitchGifs)
-        ->setTooltip("Twitch GIFs will be shown inline. When disabled, they're "
+    SettingWidget::checkbox(this->tr("Show Twitch GIFs"), s.showTwitchGifs)
+        ->setTooltip(this->tr("Twitch GIFs will be shown inline. When disabled, they're ")
                      "shown as links.")
         ->addTo(layout);
 
     auto *twitchGifSize = layout.addDropdown<float>(
-        "Twitch GIF size",
+        this->tr("Twitch GIF size"),
         {"0.5x", "0.75x", "Default", "1.25x", "1.4x (Twitch)", "1.5x", "2x"},
         s.twitchGifScale,
         [](auto value) {
@@ -614,7 +616,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         this->managedConnections_);
 
     layout.addDropdown<int>(
-        "Limit message height",
+        this->tr("Limit message height"),
         {"Never", "2 lines", "3 lines", "4 lines", "5 lines"},
         s.collpseMessagesMinLines,
         [](auto val) {
@@ -624,7 +626,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
             return fuzzyToInt(args.value, 0);
         });
     layout.addDropdown<int>(
-        "Limit length of deleted messages",
+        this->tr("Limit length of deleted messages"),
         {"No limit", "50 characters", "100 characters", "200 characters",
          "300 characters", "400 characters"},
         s.deletedMessageLengthLimit,
@@ -641,10 +643,10 @@ void GeneralPage::initLayout(GeneralPageView &layout)
 
     layout.addSeparator();
 
-    SettingWidget::checkbox("Draw a line below the most recent message before "
+    SettingWidget::checkbox(this->tr("Draw a line below the most recent message before ")
                             "switching applications.",
                             s.showLastMessageIndicator)
-        ->setTooltip("Adds an underline below the most recent message "
+        ->setTooltip(this->tr("Adds an underline below the most recent message ")
                      "sent before you tabbed out of Chatterino.")
         ->addTo(layout);
 
@@ -654,29 +656,29 @@ void GeneralPage::initLayout(GeneralPageView &layout)
 
     layout.addTitle(this->tr("Emotes"));
 
-    SettingWidget::checkbox("Enable", s.enableEmoteImages)->addTo(layout);
+    SettingWidget::checkbox(this->tr("Enable"), s.enableEmoteImages)->addTo(layout);
 
-    SettingWidget::checkbox("Animate", s.animateEmotes)->addTo(layout);
+    SettingWidget::checkbox(this->tr("Animate"), s.animateEmotes)->addTo(layout);
 
-    SettingWidget::checkbox("Animate only when Chatterino is focused",
+    SettingWidget::checkbox(this->tr("Animate only when Chatterino is focused"),
                             s.animationsWhenFocused)
         ->addTo(layout);
 
-    SettingWidget::checkbox("Enable zero-width emotes", s.enableZeroWidthEmotes)
+    SettingWidget::checkbox(this->tr("Enable zero-width emotes"), s.enableZeroWidthEmotes)
         ->setTooltip(
-            "When disabled, emotes that overlap other emotes, such as BTTV's "
+            this->tr("When disabled, emotes that overlap other emotes, such as BTTV's ")
             "cvMask and 7TV's RainTime, will appear as normal emotes.")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Enable emote completion by typing :",
+    SettingWidget::checkbox(this->tr("Enable emote completion by typing :"),
                             s.emoteCompletionWithColon)
         ->setTooltip(
-            "With this setting enabled, typing the colon character opens the "
+            this->tr("With this setting enabled, typing the colon character opens the ")
             "colon-completion popup which gives you an updating list of emotes "
             "matching the text after the colon.")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Use experimental smarter emote completion.",
+    SettingWidget::checkbox(this->tr("Use experimental smarter emote completion."),
                             s.useSmartEmoteCompletion)
         ->addTo(layout);
 
@@ -697,13 +699,13 @@ void GeneralPage::initLayout(GeneralPageView &layout)
             return fuzzyToFloat(args.value, 1.f);
         });
 
-    SettingWidget::checkbox("Remove spaces between emotes",
+    SettingWidget::checkbox(this->tr("Remove spaces between emotes"),
                             s.removeSpacesBetweenEmotes)
-        ->setTooltip("When enabled, adjacent emotes will no longer have an "
+        ->setTooltip(this->tr("When enabled, adjacent emotes will no longer have an ")
                      "added space separating them.")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Show unlisted 7TV emotes",
+    SettingWidget::checkbox(this->tr("Show unlisted 7TV emotes"),
                             s.showUnlistedSevenTVEmotes)
         ->addKeywords({"seventv"})
         ->addTo(layout);
@@ -736,51 +738,51 @@ void GeneralPage::initLayout(GeneralPageView &layout)
 
     SettingWidget::dropdown(this->tr("Emoji style"), s.emojiSet)->addTo(layout);
 
-    SettingWidget::checkbox("Show BetterTTV global emotes",
+    SettingWidget::checkbox(this->tr("Show BetterTTV global emotes"),
                             s.enableBTTVGlobalEmotes)
         ->addKeywords({"bttv"})
         ->addTo(layout);
-    SettingWidget::checkbox("Show BetterTTV channel emotes",
+    SettingWidget::checkbox(this->tr("Show BetterTTV channel emotes"),
                             s.enableBTTVChannelEmotes)
         ->addKeywords({"bttv"})
         ->addTo(layout);
     SettingWidget::checkbox(
-        "Enable BetterTTV live emote updates (requires restart)",
+        this->tr("Enable BetterTTV live emote updates (requires restart)"),
         s.enableBTTVLiveUpdates)
         ->addKeywords({"bttv"})
         ->addTo(layout);
-    SettingWidget::checkbox("Send activity to BetterTTV", s.sendBTTVActivity)
+    SettingWidget::checkbox(this->tr("Send activity to BetterTTV"), s.sendBTTVActivity)
         ->setTooltip(
-            "When enabled, Chatterino will signal an activity to BetterTTV "
+            this->tr("When enabled, Chatterino will signal an activity to BetterTTV ")
             "when you send a chat message. This is used for badges, "
             " and personal emotes. When disabled, no activity "
             "is sent and others won't see your cosmetics.")
         ->addKeywords({"bttv"})
         ->addTo(layout);
 
-    SettingWidget::checkbox("Show FrankerFaceZ global emotes",
+    SettingWidget::checkbox(this->tr("Show FrankerFaceZ global emotes"),
                             s.enableFFZGlobalEmotes)
         ->addKeywords({"ffz"})
         ->addTo(layout);
-    SettingWidget::checkbox("Show FrankerFaceZ channel emotes",
+    SettingWidget::checkbox(this->tr("Show FrankerFaceZ channel emotes"),
                             s.enableFFZChannelEmotes)
         ->addKeywords({"ffz"})
         ->addTo(layout);
 
-    SettingWidget::checkbox("Show 7TV global emotes",
+    SettingWidget::checkbox(this->tr("Show 7TV global emotes"),
                             s.enableSevenTVGlobalEmotes)
         ->addKeywords({"seventv"})
         ->addTo(layout);
-    SettingWidget::checkbox("Show 7TV channel emotes",
+    SettingWidget::checkbox(this->tr("Show 7TV channel emotes"),
                             s.enableSevenTVChannelEmotes)
         ->addKeywords({"seventv"})
         ->addTo(layout);
-    SettingWidget::checkbox("Enable 7TV live emote updates (requires restart)",
+    SettingWidget::checkbox(this->tr("Enable 7TV live emote updates (requires restart)"),
                             s.enableSevenTVEventAPI)
         ->addKeywords({"seventv"})
         ->addTo(layout);
-    SettingWidget::checkbox("Send activity to 7TV", s.sendSevenTVActivity)
-        ->setTooltip("When enabled, Chatterino will signal an activity to 7TV "
+    SettingWidget::checkbox(this->tr("Send activity to 7TV"), s.sendSevenTVActivity)
+        ->setTooltip(this->tr("When enabled, Chatterino will signal an activity to 7TV ")
                      "when you send a chat message. This is used for badges, "
                      "paints, and personal emotes. When disabled, no activity "
                      "is sent and others won't see your cosmetics.")
@@ -796,59 +798,59 @@ void GeneralPage::initLayout(GeneralPageView &layout)
     SettingWidget::dropdown("Enable Streamer Mode", s.enableStreamerMode)
         ->addTo(layout);
 
-    SettingWidget::checkbox("Hide usercard avatars",
+    SettingWidget::checkbox(this->tr("Hide usercard avatars"),
                             s.streamerModeHideUsercardAvatars)
-        ->setTooltip("Prevent potentially explicit avatars from showing.")
+        ->setTooltip(this->tr("Prevent potentially explicit avatars from showing."))
         ->addTo(layout);
 
-    SettingWidget::checkbox("Hide link thumbnails",
+    SettingWidget::checkbox(this->tr("Hide link thumbnails"),
                             s.streamerModeHideLinkThumbnails)
-        ->setTooltip("Prevent potentially explicit thumbnails from showing "
+        ->setTooltip(this->tr("Prevent potentially explicit thumbnails from showing ")
                      "when hovering links.")
         ->addTo(layout);
 
     SettingWidget::checkbox(
-        "Hide viewer count and stream length while hovering over split header",
+        this->tr("Hide viewer count and stream length while hovering over split header"),
         s.streamerModeHideViewerCountAndDuration)
         ->addTo(layout);
 
-    SettingWidget::checkbox("Hide moderation actions",
+    SettingWidget::checkbox(this->tr("Hide moderation actions"),
                             s.streamerModeHideModActions)
         ->setTooltip(
-            "Hide bans, timeouts, and automod messages from appearing in chat.")
+            this->tr("Hide bans, timeouts, and automod messages from appearing in chat."))
         ->addTo(layout);
 
-    SettingWidget::checkbox("Hide messages from restricted users",
+    SettingWidget::checkbox(this->tr("Hide messages from restricted users"),
                             s.streamerModeHideRestrictedUsers)
-        ->setTooltip("Restricted users can be marked by you, your moderators, "
+        ->setTooltip(this->tr("Restricted users can be marked by you, your moderators, ")
                      "or Twitch's AutoMod")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Hide blocked terms",
+    SettingWidget::checkbox(this->tr("Hide blocked terms"),
                             s.streamerModeHideBlockedTermText)
         ->setTooltip(
-            "Hide blocked terms from showing up in places like AutoMod "
+            this->tr("Hide blocked terms from showing up in places like AutoMod ")
             "messages. This can be useful in case you have some blocked terms "
             "that you don't want to show on stream.")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Hide user notes", s.streamerModeHideUserNotes)
-        ->setTooltip("Hide user notes from showing in usercards.")
+    SettingWidget::checkbox(this->tr("Hide user notes"), s.streamerModeHideUserNotes)
+        ->setTooltip(this->tr("Hide user notes from showing in usercards."))
         ->addTo(layout);
 
-    SettingWidget::checkbox("Mute mention sounds", s.streamerModeMuteMentions)
-        ->setTooltip("Mute your ping sound from playing.")
+    SettingWidget::checkbox(this->tr("Mute mention sounds"), s.streamerModeMuteMentions)
+        ->setTooltip(this->tr("Mute your ping sound from playing."))
         ->addTo(layout);
 
-    SettingWidget::checkbox("Suppress Live Notifications",
+    SettingWidget::checkbox(this->tr("Suppress Live Notifications"),
                             s.streamerModeSuppressLiveNotifications)
         ->setTooltip(
-            "Hide Live notification popups from appearing. (Windows Only)")
+            this->tr("Hide Live notification popups from appearing. (Windows Only)"))
         ->addTo(layout);
 
-    SettingWidget::checkbox("Suppress Inline Whispers",
+    SettingWidget::checkbox(this->tr("Suppress Inline Whispers"),
                             s.streamerModeSuppressInlineWhispers)
-        ->setTooltip("Hide whispers sent to you from appearing in chat.")
+        ->setTooltip(this->tr("Hide whispers sent to you from appearing in chat."))
         ->addTo(layout);
 
     layout.addTitle(this->tr("Link Previews"));
@@ -864,10 +866,10 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         "href=\"https://braize.pajlada.com/chatterino/legal/"
         "privacy-policy\">Privacy Policy</a>.");
 
-    SettingWidget::checkbox("Enable", s.linkInfoTooltip)->addTo(layout);
+    SettingWidget::checkbox(this->tr("Enable"), s.linkInfoTooltip)->addTo(layout);
 
     layout.addDropdown<int>(
-        "Also show thumbnails if available",
+        this->tr("Also show thumbnails if available"),
         {"Off", "Small", "Medium", "Large"}, s.thumbnailSize,
         [](auto val) {
             if (val == 0)
@@ -908,7 +910,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
             return fuzzyToInt(args.value, 0);
         });
     layout.addDropdown<int>(
-        "Show thumbnails of streams", {"Off", "Small", "Medium", "Large"},
+        this->tr("Show thumbnails of streams"), {"Off", "Small", "Medium", "Large"},
         s.thumbnailSizeStream,
         [](auto val) {
             if (val == 0)
@@ -957,7 +959,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
             "You can receive updates earlier by ticking the box below. Report "
             "issues <a href='https://chatterino.com/link/issues'>here</a>.");
 
-        SettingWidget::checkbox("Receive beta updates", s.betaUpdates)
+        SettingWidget::checkbox(this->tr("Receive beta updates"), s.betaUpdates)
             ->addTo(layout);
     }
     else
@@ -1022,10 +1024,10 @@ void GeneralPage::initLayout(GeneralPageView &layout)
 
     layout.addDescription("Chatterino only attaches to known browsers to avoid "
                           "attaching to other windows by accident.");
-    SettingWidget::checkbox("Attach to any browser (may cause issues)",
+    SettingWidget::checkbox(this->tr("Attach to any browser (may cause issues)"),
                             s.attachExtensionToAnyProcess)
         ->setTooltip(
-            "Attempt to force the Chatterino Browser Extension to work in "
+            this->tr("Attempt to force the Chatterino Browser Extension to work in ")
             "certain browsers that do not work automatically.\ne.g. Librewolf")
         ->addTo(layout);
 #endif
@@ -1140,13 +1142,13 @@ void GeneralPage::initLayout(GeneralPageView &layout)
     layout.addTitle(this->tr("Sound"));
 
     SettingWidget::dropdown(this->tr("Sound backend (requires restart)"), s.soundBackend)
-        ->setTooltip("Change this only if you're noticing issues with sound "
+        ->setTooltip(this->tr("Change this only if you're noticing issues with sound ")
                      "playback on your system")
         ->addTo(layout);
-    SettingWidget::checkbox("Keep sound backend alive (requires restart)",
+    SettingWidget::checkbox(this->tr("Keep sound backend alive (requires restart)"),
                             s.soundMiniaudioKeepEngineAlive)
         ->setTooltip(
-            "This setting makes Chatterino output silence to your sound "
+            this->tr("This setting makes Chatterino output silence to your sound ")
             "device, even if no ping is being played. Try this setting if you "
             "have issues with wireless devices not playing the first sound. "
             "Note that this can prevent your monitor or computer from "
@@ -1157,17 +1159,17 @@ void GeneralPage::initLayout(GeneralPageView &layout)
 
     layout.addSubtitle(this->tr("Chat title"));
     layout.addDescription("In live channels show:");
-    SettingWidget::checkbox("Uptime", s.headerUptime)
-        ->setTooltip("Show how long the channel has been live")
+    SettingWidget::checkbox(this->tr("Uptime"), s.headerUptime)
+        ->setTooltip(this->tr("Show how long the channel has been live"))
         ->addTo(layout);
-    SettingWidget::checkbox("Viewer count", s.headerViewerCount)
-        ->setTooltip("Show how many users are watching")
+    SettingWidget::checkbox(this->tr("Viewer count"), s.headerViewerCount)
+        ->setTooltip(this->tr("Show how many users are watching"))
         ->addTo(layout);
-    SettingWidget::checkbox("Category", s.headerGame)
-        ->setTooltip("Show what Category the stream is listed under")
+    SettingWidget::checkbox(this->tr("Category"), s.headerGame)
+        ->setTooltip(this->tr("Show what Category the stream is listed under"))
         ->addTo(layout);
-    SettingWidget::checkbox("Title", s.headerStreamTitle)
-        ->setTooltip("Show the stream title")
+    SettingWidget::checkbox(this->tr("Title"), s.headerStreamTitle)
+        ->setTooltip(this->tr("Show the stream title"))
         ->addTo(layout);
 
     layout.addSubtitle(this->tr("Unique chat (R9K)"));
@@ -1184,21 +1186,21 @@ void GeneralPage::initLayout(GeneralPageView &layout)
                           "Toggle hidden messages by pressing " +
                           toggleLocalr9kShortcut + ".");
 
-    SettingWidget::checkbox("Enable similarity checks", s.similarityEnabled)
+    SettingWidget::checkbox(this->tr("Enable similarity checks"), s.similarityEnabled)
         ->addTo(layout);
 
-    // SettingWidget::checkbox("Gray out matches", s.colorSimilarDisabled)->addTo(layout);
+    // SettingWidget::checkbox(this->tr("Gray out matches"), s.colorSimilarDisabled)->addTo(layout);
 
-    SettingWidget::checkbox("Only if by the same user", s.hideSimilarBySameUser)
+    SettingWidget::checkbox(this->tr("Only if by the same user"), s.hideSimilarBySameUser)
         ->setTooltip(
-            "When checked, messages that are very similar to each other can "
+            this->tr("When checked, messages that are very similar to each other can ")
             "still be shown as long as they're sent by different users.")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Hide my own messages", s.hideSimilarMyself)
+    SettingWidget::checkbox(this->tr("Hide my own messages"), s.hideSimilarMyself)
         ->addTo(layout);
 
-    SettingWidget::checkbox("Receive notification sounds from hidden messages",
+    SettingWidget::checkbox(this->tr("Receive notification sounds from hidden messages"),
                             s.shownSimilarTriggerHighlights)
         ->addTo(layout);
 
@@ -1208,7 +1210,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         },
         false);
     layout.addDropdown<float>(
-        "Similarity threshold", {"0.5", "0.75", "0.9"}, s.similarityPercentage,
+        this->tr("Similarity threshold"), {"0.5", "0.75", "0.9"}, s.similarityPercentage,
         [](auto val) {
             return QString::number(val);
         },
@@ -1219,7 +1221,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         "A value of 0.9 means the messages need to be 90% similar to be marked "
         "as similar.");
     layout.addDropdown<int>(
-        "Maximum delay between messages",
+        this->tr("Maximum delay between messages"),
         {"5s", "10s", "15s", "30s", "60s", "120s"}, s.hideSimilarMaxDelay,
         [](auto val) {
             return QString::number(val) + "s";
@@ -1231,7 +1233,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         "A value of 5s means if there's a 5s break between messages, we will "
         "stop looking further through the messages for similarities.");
     layout.addDropdown<int>(
-        "Amount of previous messages to check", {"1", "2", "3", "4", "5"},
+        this->tr("Amount of previous messages to check"), {"1", "2", "3", "4", "5"},
         s.hideSimilarMaxMessagesToCheck,
         [](auto val) {
             return QString::number(val);
@@ -1245,52 +1247,52 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         "compared to only if they are new enough.");
 
     layout.addSubtitle(this->tr("Visible badges"));
-    SettingWidget::checkbox("Authority", s.showBadgesGlobalAuthority)
-        ->setTooltip("e.g. staff, admin")
+    SettingWidget::checkbox(this->tr("Authority"), s.showBadgesGlobalAuthority)
+        ->setTooltip(this->tr("e.g. staff, admin"))
         ->addTo(layout);
 
-    SettingWidget::checkbox("Predictions", s.showBadgesPredictions)
+    SettingWidget::checkbox(this->tr("Predictions"), s.showBadgesPredictions)
         ->addTo(layout);
 
-    SettingWidget::checkbox("Channel", s.showBadgesChannelAuthority)
-        ->setTooltip("e.g. broadcaster, moderator")
+    SettingWidget::checkbox(this->tr("Channel"), s.showBadgesChannelAuthority)
+        ->setTooltip(this->tr("e.g. broadcaster, moderator"))
         ->addTo(layout);
 
-    SettingWidget::checkbox("Subscriber ", s.showBadgesSubscription)
+    SettingWidget::checkbox(this->tr("Subscriber "), s.showBadgesSubscription)
         ->addTo(layout);
 
-    SettingWidget::checkbox("Vanity", s.showBadgesVanity)
-        ->setTooltip("e.g. prime, bits, sub gifter")
+    SettingWidget::checkbox(this->tr("Vanity"), s.showBadgesVanity)
+        ->setTooltip(this->tr("e.g. prime, bits, sub gifter"))
         ->addTo(layout);
 
-    SettingWidget::checkbox("Chatterino", s.showBadgesChatterino)
-        ->setTooltip("e.g. Chatterino Supporter/Contributor/Developer")
+    SettingWidget::checkbox(this->tr("Chatterino"), s.showBadgesChatterino)
+        ->setTooltip(this->tr("e.g. Chatterino Supporter/Contributor/Developer"))
         ->addTo(layout);
 
-    SettingWidget::checkbox("FrankerFaceZ", s.showBadgesFfz)
+    SettingWidget::checkbox(this->tr("FrankerFaceZ"), s.showBadgesFfz)
         ->addKeywords({"ffz"})
-        ->setTooltip("e.g. Bot, FrankerFaceZ supporter, FrankerFaceZ developer")
+        ->setTooltip(this->tr("e.g. Bot, FrankerFaceZ supporter, FrankerFaceZ developer"))
         ->addTo(layout);
-    SettingWidget::checkbox("7TV", s.showBadgesSevenTV)
+    SettingWidget::checkbox(this->tr("7TV"), s.showBadgesSevenTV)
         ->addKeywords({"seventv"})
-        ->setTooltip("Badges for 7TV admins, developers, and supporters")
+        ->setTooltip(this->tr("Badges for 7TV admins, developers, and supporters"))
         ->addTo(layout);
-    SettingWidget::checkbox("BetterTTV", s.showBadgesBttv)
+    SettingWidget::checkbox(this->tr("BetterTTV"), s.showBadgesBttv)
         ->addKeywords({"bttv"})
         ->addTo(layout);
     layout.addSeparator();
-    SettingWidget::checkbox("Use custom FrankerFaceZ moderator badges",
+    SettingWidget::checkbox(this->tr("Use custom FrankerFaceZ moderator badges"),
                             s.useCustomFfzModeratorBadges)
         ->addKeywords({"ffz"})
         ->addTo(layout);
-    SettingWidget::checkbox("Use custom FrankerFaceZ VIP badges",
+    SettingWidget::checkbox(this->tr("Use custom FrankerFaceZ VIP badges"),
                             s.useCustomFfzVipBadges)
         ->addKeywords({"ffz"})
         ->addTo(layout);
 
     layout.addSubtitle(this->tr("Overlay"));
     layout.addDropdown<float>(
-        "Zoom factor", ZOOM_LEVELS, s.overlayScaleFactor,
+        this->tr("Zoom factor"), ZOOM_LEVELS, s.overlayScaleFactor,
         [](auto val) {
             if (val == 1)
             {
@@ -1313,13 +1315,13 @@ void GeneralPage::initLayout(GeneralPageView &layout)
                                 .singleStep = 1,
                             })
         ->setTooltip(
-            "Controls the opacity of the (possibly alternating) background "
+            this->tr("Controls the opacity of the (possibly alternating) background ")
             "behind messages. The color is set through the current theme. 255 "
             "corresponds to a fully opaque background.")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Enable Shadow", s.enableOverlayShadow)
-        ->setTooltip("Enables a drop shadow on the overlay. This will use more "
+    SettingWidget::checkbox(this->tr("Enable Shadow"), s.enableOverlayShadow)
+        ->setTooltip(this->tr("Enables a drop shadow on the overlay. This will use more ")
                      "processing power.")
         ->addTo(layout);
 
@@ -1329,7 +1331,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
                                 .max = 255,
                                 .singleStep = 1,
                             })
-        ->setTooltip("Controls the opacity of the added drop shadow. 255 "
+        ->setTooltip(this->tr("Controls the opacity of the added drop shadow. 255 ")
                      "corresponds to a fully opaque shadow.")
         ->addTo(layout);
 
@@ -1343,7 +1345,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
                                 .singleStep = 1,
                                 .suffix = "dp",
                             })
-        ->setTooltip("Controls how far the shadow is spread (the blur "
+        ->setTooltip(this->tr("Controls how far the shadow is spread (the blur ")
                      "radius) in device-independent pixels.")
         ->addTo(layout);
 
@@ -1354,7 +1356,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
                                 .singleStep = 1,
                                 .suffix = "dp",
                             })
-        ->setTooltip("Controls how far the shadow is offset on the x axis in "
+        ->setTooltip(this->tr("Controls how far the shadow is offset on the x axis in ")
                      "device-independent pixels. A negative value offsets to "
                      "the left and a positive to the right.")
         ->addTo(layout);
@@ -1366,7 +1368,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
                                 .singleStep = 1,
                                 .suffix = "dp",
                             })
-        ->setTooltip("Controls how far the shadow is offset on the y axis in "
+        ->setTooltip(this->tr("Controls how far the shadow is offset on the y axis in ")
                      "device-independent pixels. A negative value offsets to "
                      "the top and a positive to the bottom.")
         ->addTo(layout);
@@ -1377,17 +1379,17 @@ void GeneralPage::initLayout(GeneralPageView &layout)
             "Search engine which appears when you select text and right-click "
             "a message. Select a search engine preset from the dropdown below, "
             "or fill in your custom search engine URL and name.");
-        SettingWidget::checkbox("Enable search in right-click context menu",
+        SettingWidget::checkbox(this->tr("Enable search in right-click context menu"),
                                 s.searchEnabled)
             ->setTooltip(
-                "Allow searching selected text using a search engine from "
+                this->tr("Allow searching selected text using a search engine from ")
                 "the right-click context menu.")
             ->addTo(layout);
 
         // Preset dropdown
         QStringList presetList = {"DuckDuckGo", "Bing", "Google"};
         auto *presetCombo =
-            layout.addDropdown("Search engine preset", presetList,
+            layout.addDropdown(this->tr("Search engine preset"), presetList,
                                "Select a search engine preset");
         presetCombo->setPlaceholderText("Select...");
         presetCombo->setCurrentIndex(-1);
@@ -1441,7 +1443,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
     }
     if (supportsIncognitoLinks())
     {
-        SettingWidget::checkbox("Search in incognito/private mode",
+        SettingWidget::checkbox(this->tr("Search in incognito/private mode"),
                                 s.searchIncognito)
             ->addTo(layout);
     }
@@ -1450,7 +1452,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
 
     if (supportsIncognitoLinks())
     {
-        SettingWidget::checkbox("Open links in incognito/private mode",
+        SettingWidget::checkbox(this->tr("Open links in incognito/private mode"),
                                 s.openLinksIncognito)
             ->addTo(layout);
     }
@@ -1461,103 +1463,103 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         [](bool on) {
             getApp()->getCrashHandler()->saveShouldRecover(on);
         })
-        ->setTooltip("When possible, restart Chatterino if the program crashes")
+        ->setTooltip(this->tr("When possible, restart Chatterino if the program crashes"))
         ->addTo(layout);
 
     SettingWidget::inverseCheckbox("Show moderation messages",
                                    s.hideModerationActions)
         ->setTooltip(
-            "Show messages for timeouts, bans, and other moderator actions.")
+            this->tr("Show messages for timeouts, bans, and other moderator actions."))
         ->addTo(layout);
 
     SettingWidget::inverseCheckbox("Show deletions of single messages",
                                    s.hideDeletionActions)
-        ->setTooltip("Show when a single message is deleted.\ne.g. A message "
+        ->setTooltip(this->tr("Show when a single message is deleted.\ne.g. A message ")
                      "from TreuKS was deleted: abc")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Colorize users without color set (gray names)",
+    SettingWidget::checkbox(this->tr("Colorize users without color set (gray names)"),
                             s.colorizeNicknames)
-        ->setTooltip("Grant a random color to users who never set a color for "
+        ->setTooltip(this->tr("Grant a random color to users who never set a color for ")
                      "themselves")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Mention users with a comma",
+    SettingWidget::checkbox(this->tr("Mention users with a comma"),
                             s.mentionUsersWithComma)
-        ->setTooltip("When using tab-completion, if the username is at the "
+        ->setTooltip(this->tr("When using tab-completion, if the username is at the ")
                      "start of the message, include a comma at the end of the "
                      "name.\ne.g. pajl -> pajlada,")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Show joined users (< 1000 chatters)", s.showJoins)
+    SettingWidget::checkbox(this->tr("Show joined users (< 1000 chatters)"), s.showJoins)
         ->setTooltip(
-            "Show a Twitch system message stating what users have joined the "
+            this->tr("Show a Twitch system message stating what users have joined the ")
             "chat, only available when the chat has less than 1000 users")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Show parted users (< 1000 chatters)", s.showParts)
+    SettingWidget::checkbox(this->tr("Show parted users (< 1000 chatters)"), s.showParts)
         ->setTooltip(
-            "Show a Twitch system message stating what users have left the "
+            this->tr("Show a Twitch system message stating what users have left the ")
             "chat, only available when chat has less than 1000 users")
         ->addTo(layout);
 
     SettingWidget::checkbox(
-        "Automatically close user popup when it loses focus",
+        this->tr("Automatically close user popup when it loses focus"),
         s.autoCloseUserPopup)
         ->addTo(layout);
 
     SettingWidget::checkbox(
-        "Automatically close reply thread popup when it loses focus",
+        this->tr("Automatically close reply thread popup when it loses focus"),
         s.autoCloseThreadPopup)
         ->addTo(layout);
 
-    SettingWidget::checkbox("Always show pinned channel message",
+    SettingWidget::checkbox(this->tr("Always show pinned channel message"),
                             s.alwaysShowPinnedMessage)
         ->setTooltip(
-            "When enabled, pinned messages will stay visible instead of "
+            this->tr("When enabled, pinned messages will stay visible instead of ")
             "automatically hiding after a few seconds.")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Lowercase domains (anti-phishing)",
+    SettingWidget::checkbox(this->tr("Lowercase domains (anti-phishing)"),
                             s.lowercaseDomains)
         ->setTooltip(
-            "Make all clickable links lowercase to deter phishing attempts.")
+            this->tr("Make all clickable links lowercase to deter phishing attempts."))
         ->addTo(layout);
 
-    SettingWidget::checkbox("Show user's pronouns in user card", s.showPronouns)
+    SettingWidget::checkbox(this->tr("Show user's pronouns in user card"), s.showPronouns)
         ->setDescription(
             R"(Pronouns are retrieved from <a href="https://pr.alejo.io">pr.alejo.io</a> when a user card is opened.)")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Show stream title in live message",
+    SettingWidget::checkbox(this->tr("Show stream title in live message"),
                             s.showTitleInLiveMessage)
-        ->setTooltip("The title in the message will be the title the streamer "
+        ->setTooltip(this->tr("The title in the message will be the title the streamer ")
                      "set when they went live, and will not update as the "
                      "streamer updates their title.")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Bold @usernames", s.boldUsernames)
-        ->setTooltip("Bold @mentions to make them more noticeable.")
+    SettingWidget::checkbox(this->tr("Bold @usernames"), s.boldUsernames)
+        ->setTooltip(this->tr("Bold @mentions to make them more noticeable."))
         ->addTo(layout);
 
-    SettingWidget::checkbox("Color @usernames", s.colorUsernames)
-        ->setTooltip("If Chatterino has seen a user, highlight @mention's of "
+    SettingWidget::checkbox(this->tr("Color @usernames"), s.colorUsernames)
+        ->setTooltip(this->tr("If Chatterino has seen a user, highlight @mention's of ")
                      "them with their Twitch color.")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Try to find usernames without @ prefix",
+    SettingWidget::checkbox(this->tr("Try to find usernames without @ prefix"),
                             s.findAllUsernames)
-        ->setTooltip("Find mentions of users in chat without the @ prefix.")
+        ->setTooltip(this->tr("Find mentions of users in chat without the @ prefix."))
         ->addTo(layout);
 
-    SettingWidget::checkbox("Show username autocompletion popup menu",
+    SettingWidget::checkbox(this->tr("Show username autocompletion popup menu"),
                             s.showUsernameCompletionMenu)
         ->addTo(layout);
 
-    SettingWidget::checkbox("Always include broadcaster in user completions",
+    SettingWidget::checkbox(this->tr("Always include broadcaster in user completions"),
                             s.alwaysIncludeBroadcasterInUserCompletions)
         ->setTooltip(
-            "This will ensure a broadcaster is always easy to ping, even if "
+            this->tr("This will ensure a broadcaster is always easy to ping, even if ")
             "they don't have chat open or have typed recently.")
         ->addTo(layout);
 
@@ -1566,7 +1568,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
 
     ComboBox *nameDropdown =
         layout.addDropdown<std::underlying_type_t<UsernameDisplayMode>>(
-            "Username style", usernameDisplayModes, s.usernameDisplayMode,
+            this->tr("Username style"), usernameDisplayModes, s.usernameDisplayMode,
             [usernameDisplayModes](auto val) {
                 return usernameDisplayModes.at(val - 1);
                 // UsernameDisplayMode enum indexes from 1
@@ -1584,7 +1586,7 @@ void GeneralPage::initLayout(GeneralPageView &layout)
     nameDropdown->setMinimumWidth(nameDropdown->minimumSizeHint().width());
 
     layout.addDropdown<float>(
-        "Username font weight", {"50", "Default", "75", "100"}, s.boldScale,
+        this->tr("Username font weight"), {"50", "Default", "75", "100"}, s.boldScale,
         [](auto val) {
             if (val == 63)
             {
@@ -1600,9 +1602,9 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         });
 
     SettingWidget::checkbox(
-        "Double click to open links and other elements in chat",
+        this->tr("Double click to open links and other elements in chat"),
         s.linksDoubleClickOnly)
-        ->setTooltip("When enabled, opening links/usercards requires "
+        ->setTooltip(this->tr("When enabled, opening links/usercards requires ")
                      "double-clicking.\nUseful for making sure you don't "
                      "accidentally click on suspicious links.\nClicking a link "
                      "once will pause the chat briefly to allow for a less "
@@ -1610,48 +1612,48 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         ->addKeywords({"pause"})
         ->addTo(layout);
 
-    SettingWidget::checkbox("Unshorten links", s.unshortLinks)
-        ->setTooltip("When enabled, \"right-click + copy link\" will copy the "
+    SettingWidget::checkbox(this->tr("Unshorten links"), s.unshortLinks)
+        ->setTooltip(this->tr("When enabled, \"right-click + copy link\" will copy the ")
                      "unshortened version of the link.\ne.g. "
                      "https://bit.ly/mrfors -> https://forsen.tv/")
         ->addTo(layout);
 
     SettingWidget::checkbox(
-        "Only search for emote autocompletion at the start of emote names",
+        this->tr("Only search for emote autocompletion at the start of emote names"),
         s.prefixOnlyEmoteCompletion)
-        ->setTooltip("When disabled, emote tab-completion will complete based "
+        ->setTooltip(this->tr("When disabled, emote tab-completion will complete based ")
                      "on any part of the name.\ne.g. sheffy -> DatSheffy")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Only search for username autocompletion with an @",
+    SettingWidget::checkbox(this->tr("Only search for username autocompletion with an @"),
                             s.userCompletionOnlyWithAt)
-        ->setTooltip("When enabled, username tab-completion will only complete "
+        ->setTooltip(this->tr("When enabled, username tab-completion will only complete ")
                      "when using @\ne.g. pajl -> pajl | @pajl -> @pajlada")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Show Twitch whispers inline", s.inlineWhispers)
-        ->setTooltip("Show whispers as messages in all splits instead of just "
+    SettingWidget::checkbox(this->tr("Show Twitch whispers inline"), s.inlineWhispers)
+        ->setTooltip(this->tr("Show whispers as messages in all splits instead of just ")
                      "/whispers.\nHighlighting of this is now controlled in "
                      "the Highlights page.")
         ->addTo(layout);
 
     SettingWidget::checkbox(
-        "Automatically subscribe to participated reply threads",
+        this->tr("Automatically subscribe to participated reply threads"),
         s.autoSubToParticipatedThreads)
         ->setTooltip(
-            "When enabled, you will automatically subscribe to reply threads "
+            this->tr("When enabled, you will automatically subscribe to reply threads ")
             "you participate in.\nThis means reply threads you participate in "
             "will use your \"Subscribed Reply Threads\" highlight settings.")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Load message history on connect",
+    SettingWidget::checkbox(this->tr("Load message history on connect"),
                             s.loadTwitchMessageHistoryOnConnect)
         ->addTo(layout);
 
     SettingWidget::lineEdit("Message history URL", s.messageHistoryUrl,
                             recentmessages::DEFAULT_API_URL.toString())
         ->setTooltip(
-            "Use %1 where the channel name should be inserted, for example: " +
+            this->tr("Use %1 where the channel name should be inserted, for example: ") +
             recentmessages::DEFAULT_API_URL.toString())
         ->addTo(layout);
 
@@ -1685,12 +1687,12 @@ void GeneralPage::initLayout(GeneralPageView &layout)
 
     SettingWidget::dropdown("Show blocked term automod messages",
                             s.showBlockedTermAutomodMessages)
-        ->setTooltip("Show messages that are blocked by AutoMod for containing "
+        ->setTooltip(this->tr("Show messages that are blocked by AutoMod for containing ")
                      "a public blocked term in the current channel.")
         ->addTo(layout);
 
     layout.addDropdown<int>(
-        "Stack timeouts", {"Stack", "Stack until timeout", "Don't stack"},
+        this->tr("Stack timeouts"), {this->tr("Stack"), this->tr("Stack until timeout"), this->tr("Don't stack")},
         s.timeoutStackStyle,
         [](int index) {
             return index;
@@ -1700,39 +1702,39 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         },
         false, "Combine consecutive timeout messages into a single message.");
 
-    SettingWidget::checkbox("Combine multiple bit tips into one", s.stackBits)
-        ->setTooltip("Combine consecutive cheermotes (sent in a single "
+    SettingWidget::checkbox(this->tr("Combine multiple bit tips into one"), s.stackBits)
+        ->setTooltip(this->tr("Combine consecutive cheermotes (sent in a single ")
                      "message) into one cheermote.")
         ->addTo(layout);
 
     // update this tooltip if https://github.com/Chatterino/chatterino2/pull/1557 is ever merged
-    SettingWidget::checkbox("Messages in /mentions highlights tab",
+    SettingWidget::checkbox(this->tr("Messages in /mentions highlights tab"),
                             s.highlightMentions)
-        ->setTooltip("When disabled, the /mentions tab will not highlight in "
+        ->setTooltip(this->tr("When disabled, the /mentions tab will not highlight in ")
                      "red when you are mentioned.")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Strip leading mention in replies",
+    SettingWidget::checkbox(this->tr("Strip leading mention in replies"),
                             s.stripReplyMention)
         ->setTooltip(
-            "When disabled, messages sent in reply threads will include the "
+            this->tr("When disabled, messages sent in reply threads will include the ")
             "@mention for the related thread. If the reply context is hidden, "
             "these mentions will never be stripped.")
         ->addTo(layout);
 
     SettingWidget::dropdown("Chat send protocol", s.chatSendProtocol)
-        ->setTooltip("'Helix' will use Twitch's Helix API to send messages. "
+        ->setTooltip(this->tr("'Helix' will use Twitch's Helix API to send messages. ")
                      "'IRC' will use IRC to send messages.")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Show send message button", s.showSendButton)
-        ->setTooltip("Show a Send button next to each split input that can be "
+    SettingWidget::checkbox(this->tr("Show send message button"), s.showSendButton)
+        ->setTooltip(this->tr("Show a Send button next to each split input that can be ")
                      "clicked to send the message")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Disable renaming of tabs on double-click",
+    SettingWidget::checkbox(this->tr("Disable renaming of tabs on double-click"),
                             s.disableTabRenamingOnClick)
-        ->setTooltip("Prevents the rename dialog from opening when a tab is "
+        ->setTooltip(this->tr("Prevents the rename dialog from opening when a tab is ")
                      "double-clicked")
         ->addTo(layout);
 
@@ -1740,14 +1742,14 @@ void GeneralPage::initLayout(GeneralPageView &layout)
         "Shared chat session status refresh interval",
         s.sharedChatSessionRefreshInterval,
         {.min = 5, .max = 999, .singleStep = 1, .suffix = "s"})
-        ->setTooltip("How often Chatterino polls the Twitch API for the "
+        ->setTooltip(this->tr("How often Chatterino polls the Twitch API for the ")
                      "shared chat session status.")
         ->addTo(layout);
 
-    SettingWidget::checkbox("Show shared chat badge for all messages",
+    SettingWidget::checkbox(this->tr("Show shared chat badge for all messages"),
                             s.sharedChatAlwaysShowBadge)
         ->setTooltip(
-            "If turned off, only messages from other participants have a "
+            this->tr("If turned off, only messages from other participants have a ")
             "shared chat badge")
         ->addTo(layout);
 

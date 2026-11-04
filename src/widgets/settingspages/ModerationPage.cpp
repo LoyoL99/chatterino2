@@ -79,10 +79,10 @@ ModerationPage::ModerationPage()
     auto tabs = layoutCreator.emplace<QTabWidget>();
     this->tabWidget_ = tabs.getElement();
 
-    auto logs = tabs.appendTab(new QVBoxLayout, "Logs");
+    auto logs = tabs.appendTab(new QVBoxLayout, this->tr("Logs"));
     {
         QCheckBox *enableLogging = this->createCheckBox(
-            "Enable logging", getSettings()->enableLogging);
+            this->tr("Enable logging"), getSettings()->enableLogging);
         logs.append(enableLogging);
 
         auto logsPathLabel = logs.emplace<QLabel>();
@@ -118,8 +118,8 @@ ModerationPage::ModerationPage()
         auto buttons = logs.emplace<QHBoxLayout>().withoutMargin();
 
         // Select and Reset
-        auto selectDir = buttons.emplace<QPushButton>("Select log directory ");
-        auto resetDir = buttons.emplace<QPushButton>("Reset");
+        auto selectDir = buttons.emplace<QPushButton>(this->tr("Select log directory"));
+        auto resetDir = buttons.emplace<QPushButton>(this->tr("Reset"));
 
         getSettings()->logPath.connect(
             [element = resetDir.getElement()](const QString &path) {
@@ -177,7 +177,7 @@ ModerationPage::ModerationPage()
         logTimestampFormat->setToolTip("a = am/pm, zzz = milliseconds");
         logsTimestampFormatLayout.append(logTimestampFormat);
 
-        SettingWidget::checkbox("Use Twitch's timestamps",
+        SettingWidget::checkbox(this->tr("Use Twitch's timestamps"),
                                 getSettings()->tryUseTwitchTimestamps)
             ->setTooltip(
                 "Try to use Twitch's timestamp (the time when the message was "
@@ -190,14 +190,14 @@ ModerationPage::ModerationPage()
             ->addToLayout(logs->layout());
 
         QCheckBox *onlyLogListedChannels =
-            this->createCheckBox("Only log channels listed below",
+            this->createCheckBox(this->tr("Only log channels listed below"),
                                  getSettings()->onlyLogListedChannels);
 
         onlyLogListedChannels->setEnabled(getSettings()->enableLogging);
         logs.append(onlyLogListedChannels);
 
         auto *separatelyStoreStreamLogs =
-            this->createCheckBox("Store live stream logs as separate files",
+            this->createCheckBox(this->tr("Store live stream logs as separate files"),
                                  getSettings()->separatelyStoreStreamLogs);
 
         separatelyStoreStreamLogs->setEnabled(getSettings()->enableLogging);

@@ -55,7 +55,7 @@ AboutPage::AboutPage()
         logo->setScaledContents(true);
 
         // Version
-        auto versionInfo = layout.emplace<QGroupBox>("Version");
+        auto versionInfo = layout.emplace<QGroupBox>(this->tr("Version"));
         {
             auto vbox = versionInfo.emplace<QVBoxLayout>();
             const auto &version = Version::instance();
@@ -84,7 +84,7 @@ AboutPage::AboutPage()
         }
 
         // About Chatterino
-        auto aboutChatterino = layout.emplace<QGroupBox>("About Chatterino...");
+        auto aboutChatterino = layout.emplace<QGroupBox>(this->tr("About Chatterino..."));
         {
             auto l = aboutChatterino.emplace<QVBoxLayout>();
 
@@ -97,7 +97,7 @@ AboutPage::AboutPage()
 
         // Licenses
         auto licenses =
-            layout.emplace<QGroupBox>("Open source software used...");
+            layout.emplace<QGroupBox>(this->tr("Open source software used..."));
         {
             auto form = licenses.emplace<QFormLayout>();
 
@@ -170,7 +170,7 @@ AboutPage::AboutPage()
         }
 
         // Attributions
-        auto attributions = layout.emplace<QGroupBox>("Attributions...");
+        auto attributions = layout.emplace<QGroupBox>(this->tr("Attributions..."));
         {
             auto l = attributions.emplace<QVBoxLayout>();
 
@@ -188,7 +188,7 @@ AboutPage::AboutPage()
         }
 
         // Contributors
-        auto contributors = layout.emplace<QGroupBox>("People");
+        auto contributors = layout.emplace<QGroupBox>(this->tr("People"));
         {
             auto l = contributors.emplace<FlowLayout>();
 

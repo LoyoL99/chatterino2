@@ -54,7 +54,7 @@ SettingsDialog::SettingsDialog(QWidget *parent)
                          ~Qt::WindowContextHelpButtonHint);
 
     this->setAttribute(Qt::WA_DeleteOnClose);
-    this->resize(915, 600);
+    this->resize(950, 600);
 
     this->initUi();
     this->addTabs();
@@ -98,7 +98,15 @@ void SettingsDialog::setSearchPlaceholderText()
             "(" + searchSeq.toString(QKeySequence::SequenceFormat::NativeText) +
             ")";
     }
-    this->ui_.search->setPlaceholderText("Find in settings... " + searchHotkey);
+    if (searchHotkey.isEmpty())
+    {
+        this->ui_.search->setPlaceholderText(this->tr("Find in settings..."));
+    }
+    else
+    {
+        this->ui_.search->setPlaceholderText(
+            this->tr("Find in settings... %1").arg(searchHotkey));
+    }
 }
 
 void SettingsDialog::initUi()
@@ -134,7 +142,7 @@ void SettingsDialog::initUi()
         .withoutMargin()
         .assign(&this->ui_.tabContainer);
     this->ui_.tabContainerContainer->setFixedWidth(
-        static_cast<int>(150 * this->dpi_));
+        static_cast<int>(185 * this->dpi_));
 
     // right side (pages)
     centerBox.emplace<QStackedLayout>()
