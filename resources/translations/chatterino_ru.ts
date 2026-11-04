@@ -1387,6 +1387,256 @@ e.g. A message deleted by a moderator</source>
             <source>Messages in /mentions highlights tab</source>
             <translation>Сообщения во вкладке упоминаний /mentions</translation>
         </message>
+        <message>
+            <source>'Helix' will use Twitch's Helix API to send messages. 'IRC' will use IRC to send messages.</source>
+            <translation>'Helix' использует Twitch Helix API для отправки сообщений. 'IRC' использует стандартный протокол IRC.</translation>
+        </message>
+        <message>
+            <source>Adds an underline below the most recent message sent before you tabbed out of Chatterino.</source>
+            <translation>Подчеркивает последнее сообщение, полученное до переключения из окна Chatterino.</translation>
+        </message>
+        <message>
+            <source>Allow searching selected text using a search engine from the right-click context menu.</source>
+            <translation>Разрешает поиск выделенного текста в поисковой системе через контекстное меню правого клика.</translation>
+        </message>
+        <message>
+            <source>Attach to any browser (may cause issues)</source>
+            <translation>Подключаться к любому браузеру (может вызывать проблемы)</translation>
+        </message>
+        <message>
+            <source>Attempt to force the Chatterino Browser Extension to work in certain browsers that do not work automatically.
+e.g. Librewolf</source>
+            <translation>Принудительно подключать расширение Chatterino в браузерах, где оно не определяется автоматически (например, LibreWolf).</translation>
+        </message>
+        <message>
+            <source>Change this only if you're noticing issues with sound playback on your system</source>
+            <translation>Изменяйте эту опцию только при проблемах с воспроизведением звука в системе.</translation>
+        </message>
+        <message>
+            <source>Combine consecutive cheermotes (sent in a single message) into one cheermote.</source>
+            <translation>Объединяет подряд идущие cheermote в одном сообщении в один значок.</translation>
+        </message>
+        <message>
+            <source>Controls how far the shadow is offset on the x axis in device-independent pixels. A negative value offsets to the left and a positive to the right.</source>
+            <translation>Смещение тени по оси X в пикселях. Отрицательное значение смещает влево, положительное — вправо.</translation>
+        </message>
+        <message>
+            <source>Controls how far the shadow is offset on the y axis in device-independent pixels. A negative value offsets to the top and a positive to the bottom.</source>
+            <translation>Смещение тени по оси Y в пикселях. Отрицательное значение смещает вверх, положительное — вниз.</translation>
+        </message>
+        <message>
+            <source>Controls how far the shadow is spread (the blur radius) in device-independent pixels.</source>
+            <translation>Радиус размытия тени в аппаратно-независимых пикселях.</translation>
+        </message>
+        <message>
+            <source>Controls the opacity of the (possibly alternating) background behind messages. The color is set through the current theme. 255 corresponds to a fully opaque background.</source>
+            <translation>Прозрачность фоновой подложки сообщений. 255 — полностью непрозрачный фон.</translation>
+        </message>
+        <message>
+            <source>Controls the opacity of the added drop shadow. 255 corresponds to a fully opaque shadow.</source>
+            <translation>Прозрачность тени. 255 — полностью непрозрачная тень.</translation>
+        </message>
+        <message>
+            <source>Draw a line below the most recent message before switching applications.</source>
+            <translation>Рисовать черту под последним сообщением перед переключением между программами.</translation>
+        </message>
+        <message>
+            <source>Enables a drop shadow on the overlay. This will use more processing power.</source>
+            <translation>Включает тень для оверлея (может потребовать больше ресурсов видеокарты).</translation>
+        </message>
+        <message>
+            <source>Grant a random color to users who never set a color for themselves</source>
+            <translation>Присваивать случайный цвет пользователям, которые не выбрали цвет ника на Twitch.</translation>
+        </message>
+        <message>
+            <source>Hide blocked terms from showing up in places like AutoMod messages. This can be useful in case you have some blocked terms that you don't want to show on stream.</source>
+            <translation>Скрывать запрещенные слова в сообщениях AutoMod, чтобы они случайно не отобразились на стриме.</translation>
+        </message>
+        <message>
+            <source>How often Chatterino polls the Twitch API for the shared chat session status.</source>
+            <translation>Частота опроса Twitch API для проверки статуса общего чата.</translation>
+        </message>
+        <message>
+            <source>If Chatterino has seen a user, highlight @mention's of them with their Twitch color.</source>
+            <translation>Если пользователь уже появлялся в чате, подсвечивать @упоминания его цвета на Twitch.</translation>
+        </message>
+        <message>
+            <source>If turned off, only messages from other participants have a shared chat badge</source>
+            <translation>Если выключено, значок общего чата показывается только на сообщениях других участников.</translation>
+        </message>
+        <message>
+            <source>Limit the width of messages containing ASCII art to match the width of Twitch web chat.</source>
+            <translation>Ограничивать ширину сообщений с ASCII-артом под ширину веб-чата Twitch.</translation>
+        </message>
+        <message>
+            <source>Mute your ping sound from playing.</source>
+            <translation>Заглушить воспроизведение звукового сигнала при упоминаниях.</translation>
+        </message>
+        <message>
+            <source>Only if by the same user</source>
+            <translation>Только от одного пользователя</translation>
+        </message>
+        <message>
+            <source>Prevent potentially explicit thumbnails from showing when hovering links.</source>
+            <translation>Скрывать миниатюры с потенциально неприемлемым контентом при наведении на ссылки.</translation>
+        </message>
+        <message>
+            <source>Prevents the rename dialog from opening when a tab is double-clicked</source>
+            <translation>Отключает диалог переименования вкладки по двойному щелчку.</translation>
+        </message>
+        <message>
+            <source>Reduce opacity of messages that were posted before Chatterino was started or while re-connecting.</source>
+            <translation>Снижать яркость сообщений, отправленных до запуска Chatterino или во время переподключения.</translation>
+        </message>
+        <message>
+            <source>Restricted users can be marked by you, your moderators, or Twitch's AutoMod</source>
+            <translation>Ограниченные пользователи могут быть помечены вами, модераторами или AutoMod Twitch.</translation>
+        </message>
+        <message>
+            <source>Show a Send button next to each split input that can be clicked to send the message</source>
+            <translation>Показывать кнопку «Отправить» рядом со строкой ввода чата.</translation>
+        </message>
+        <message>
+            <source>Show a Twitch system message stating what users have joined the chat, only available when the chat has less than 1000 users</source>
+            <translation>Показывать системное сообщение о подключении пользователей к чату (работает при &lt; 1000 участников).</translation>
+        </message>
+        <message>
+            <source>Show a Twitch system message stating what users have left the chat, only available when chat has less than 1000 users</source>
+            <translation>Показывать системное сообщение об отключении пользователей от чата (работает при &lt; 1000 участников).</translation>
+        </message>
+        <message>
+            <source>Show messages that are blocked by AutoMod for containing a public blocked term in the current channel.</source>
+            <translation>Показывать сообщения, заблокированные AutoMod из-за содержания запрещенных на канале слов.</translation>
+        </message>
+        <message>
+            <source>Show when a single message is deleted.
+e.g. A message from TreuKS was deleted: abc</source>
+            <translation>Показывать уведомление при удалении отдельного сообщения модератором (например: Удалено сообщение от TreuKS: abc).</translation>
+        </message>
+        <message>
+            <source>Show whispers as messages in all splits instead of just /whispers.
+Highlighting of this is now controlled in the Highlights page.</source>
+            <translation>Показывать личные сообщения во всех сплитах, а не только в /whispers.
+Подсветка настраивается в разделе «Подсветка».</translation>
+        </message>
+        <message>
+            <source>Shows a red dot in the top right corner of a tab to indicate one of the channels in the tab is live.</source>
+            <translation>Красная точка в углу вкладки указывает, что один из каналов на ней сейчас в эфире.</translation>
+        </message>
+        <message>
+            <source>Slightly change the background behind every other message to help better tell them apart.</source>
+            <translation>Слегка чередует оттенок фона строк сообщений для лучшей читаемости.</translation>
+        </message>
+        <message>
+            <source>The title in the message will be the title the streamer set when they went live, and will not update as the streamer updates their title.</source>
+            <translation>В уведомлении сохраняется заголовок, установленный стримером на момент начала трансляции.</translation>
+        </message>
+        <message>
+            <source>This setting makes Chatterino output silence to your sound device, even if no ping is being played. Try this setting if you have issues with wireless devices not playing the first sound. Note that this can prevent your monitor or computer from sleeping.</source>
+            <translation>Chatterino выводит тишину в звуковое устройство, чтобы беспроводные наушники не «засыпали» и не пропускали начало сигнала уведомления.</translation>
+        </message>
+        <message>
+            <source>This setting will only affect how messages are shown. You can reply to a message regardless of this setting.</source>
+            <translation>Влияет только на отображение сообщений в чате. Отвечать на сообщения можно независимо от этого параметра.</translation>
+        </message>
+        <message>
+            <source>This theme is selected if your system is in a dark theme and you enabled the adaptive 'System' theme.</source>
+            <translation>Эта тема применяется, если в Windows активна темная тема и включена адаптивная тема «System».</translation>
+        </message>
+        <message>
+            <source>This theme is selected if your system is in a light theme and you enabled the adaptive 'System' theme.</source>
+            <translation>Эта тема применяется, если в Windows активна светлая тема и включена адаптивная тема «System».</translation>
+        </message>
+        <message>
+            <source>This will ensure a broadcaster is always easy to ping, even if they don't have chat open or have typed recently.</source>
+            <translation>Автор канала всегда будет доступен в подсказках автодополнения никнеймов.</translation>
+        </message>
+        <message>
+            <source>Twitch GIFs will be shown inline. When disabled, they're shown as links.</source>
+            <translation>GIF-изображения Twitch будут отображаться внутри чата. При отключении — в виде ссылок.</translation>
+        </message>
+        <message>
+            <source>Use %1 where the channel name should be inserted, for example: </source>
+            <translation>Используйте %1 в месте подстановки имени канала, например: </translation>
+        </message>
+        <message>
+            <source>When checked, messages that are very similar to each other can still be shown as long as they're sent by different users.</source>
+            <translation>Похожие сообщения будут отображаться, если они отправлены разными участниками чата.</translation>
+        </message>
+        <message>
+            <source>When disabled, emote tab-completion will complete based on any part of the name.
+e.g. sheffy -&gt; DatSheffy</source>
+            <translation>Если выключено, автодополнение смайлов будет искать совпадения в любой части слова (например, sheffy -&gt; DatSheffy).</translation>
+        </message>
+        <message>
+            <source>When disabled, emotes that overlap other emotes, such as BTTV's cvMask and 7TV's RainTime, will appear as normal emotes.</source>
+            <translation>Если выключено, накладывающиеся смайлики будут отображаться как отдельные обычные смайлы.</translation>
+        </message>
+        <message>
+            <source>When disabled, messages sent in reply threads will include the @mention for the related thread. If the reply context is hidden, these mentions will never be stripped.</source>
+            <translation>Если выключено, отправка в ветку ответов будет содержать @упоминание пользователя.</translation>
+        </message>
+        <message>
+            <source>When disabled, the /mentions tab will not highlight in red when you are mentioned.</source>
+            <translation>Если выключено, вкладка /mentions не будет загораться красным при упоминании вашего никнейма.</translation>
+        </message>
+        <message>
+            <source>When disabled, the x to close a tab will be hidden.
+Tabs can still be closed by right-clicking or pressing %1.</source>
+            <translation>Скрывает крестик закрытия на вкладках.
+Вкладку можно закрыть правым кликом или нажатием %1.</translation>
+        </message>
+        <message>
+            <source>When enabled, "right-click + copy link" will copy the unshortened version of the link.
+e.g. https://bit.ly/mrfors -&gt; https://forsen.tv/</source>
+            <translation>При копировании ссылки будет копироваться полный прямой адрес вместо сокращенного (например: https://bit.ly/... -&gt; https://...).</translation>
+        </message>
+        <message>
+            <source>When enabled, Chatterino will signal an activity to 7TV when you send a chat message. This is used for badges, paints, and personal emotes. When disabled, no activity is sent and others won't see your cosmetics.</source>
+            <translation>Передает статус активности в 7TV при отправке сообщений (необходимо для отображения ваших значков, стилей и персональных смайлов 7TV).</translation>
+        </message>
+        <message>
+            <source>When enabled, Chatterino will signal an activity to BetterTTV when you send a chat message. This is used for badges,  and personal emotes. When disabled, no activity is sent and others won't see your cosmetics.</source>
+            <translation>Передает статус активности в BetterTTV при отправке сообщений (необходимо для персональных значков и смайлов BetterTTV).</translation>
+        </message>
+        <message>
+            <source>When enabled, adjacent emotes will no longer have an added space separating them.</source>
+            <translation>Убирает дополнительный пробел между расположенными подряд смайликами.</translation>
+        </message>
+        <message>
+            <source>When enabled, opening links/usercards requires double-clicking.
+Useful for making sure you don't accidentally click on suspicious links.
+Clicking a link once will pause the chat briefly to allow for a less accident-prone double-clicking.</source>
+            <translation>Открытие ссылок и карточек пользователей требует двойного щелчка.
+Защищает от случайного перехода по ссылкам при быстром чате.</translation>
+        </message>
+        <message>
+            <source>When enabled, pinned messages will stay visible instead of automatically hiding after a few seconds.</source>
+            <translation>Закрепленные сообщения будут оставаться на экране, а не исчезать через несколько секунд.</translation>
+        </message>
+        <message>
+            <source>When enabled, username tab-completion will only complete when using @
+e.g. pajl -&gt; pajl | @pajl -&gt; @pajlada</source>
+            <translation>Автодополнение никнеймов работает только при наличии символа @ перед ником (например: @pajl -&gt; @pajlada).</translation>
+        </message>
+        <message>
+            <source>When enabled, you will automatically subscribe to reply threads you participate in.
+This means reply threads you participate in will use your "Subscribed Reply Threads" highlight settings.</source>
+            <translation>Автоматически подписывает вас на ветки обсуждений с вашим участием (к ним применяются настройки подсветки подписанных веток).</translation>
+        </message>
+        <message>
+            <source>When horizontal tabs are wrapped, extend the line for the whole width of the window.</source>
+            <translation>При многострочном расположении вкладок растягивает активную строку на всю ширину окна.</translation>
+        </message>
+        <message>
+            <source>When using tab-completion, if the username is at the start of the message, include a comma at the end of the name.
+e.g. pajl -&gt; pajlada,</source>
+            <translation>При автодополнении никнейма в начале строки автоматически добавляет запятую после ника (например: pajl -&gt; pajlada,).</translation>
+        </message>
+        <message>
+            <source>With this setting enabled, typing the colon character opens the colon-completion popup which gives you an updating list of emotes matching the text after the colon.</source>
+            <translation>Ввод двоеточия : сразу открывает всплывающий список поиска смайлов по введенным буквам.</translation>
+        </message>
     </context>
     <context>
         <name>Notebook</name>
@@ -7919,6 +8169,256 @@ e.g. A message deleted by a moderator</source>
         <message>
             <source>Messages in /mentions highlights tab</source>
             <translation>Сообщения во вкладке упоминаний /mentions</translation>
+        </message>
+        <message>
+            <source>'Helix' will use Twitch's Helix API to send messages. 'IRC' will use IRC to send messages.</source>
+            <translation>'Helix' использует Twitch Helix API для отправки сообщений. 'IRC' использует стандартный протокол IRC.</translation>
+        </message>
+        <message>
+            <source>Adds an underline below the most recent message sent before you tabbed out of Chatterino.</source>
+            <translation>Подчеркивает последнее сообщение, полученное до переключения из окна Chatterino.</translation>
+        </message>
+        <message>
+            <source>Allow searching selected text using a search engine from the right-click context menu.</source>
+            <translation>Разрешает поиск выделенного текста в поисковой системе через контекстное меню правого клика.</translation>
+        </message>
+        <message>
+            <source>Attach to any browser (may cause issues)</source>
+            <translation>Подключаться к любому браузеру (может вызывать проблемы)</translation>
+        </message>
+        <message>
+            <source>Attempt to force the Chatterino Browser Extension to work in certain browsers that do not work automatically.
+e.g. Librewolf</source>
+            <translation>Принудительно подключать расширение Chatterino в браузерах, где оно не определяется автоматически (например, LibreWolf).</translation>
+        </message>
+        <message>
+            <source>Change this only if you're noticing issues with sound playback on your system</source>
+            <translation>Изменяйте эту опцию только при проблемах с воспроизведением звука в системе.</translation>
+        </message>
+        <message>
+            <source>Combine consecutive cheermotes (sent in a single message) into one cheermote.</source>
+            <translation>Объединяет подряд идущие cheermote в одном сообщении в один значок.</translation>
+        </message>
+        <message>
+            <source>Controls how far the shadow is offset on the x axis in device-independent pixels. A negative value offsets to the left and a positive to the right.</source>
+            <translation>Смещение тени по оси X в пикселях. Отрицательное значение смещает влево, положительное — вправо.</translation>
+        </message>
+        <message>
+            <source>Controls how far the shadow is offset on the y axis in device-independent pixels. A negative value offsets to the top and a positive to the bottom.</source>
+            <translation>Смещение тени по оси Y в пикселях. Отрицательное значение смещает вверх, положительное — вниз.</translation>
+        </message>
+        <message>
+            <source>Controls how far the shadow is spread (the blur radius) in device-independent pixels.</source>
+            <translation>Радиус размытия тени в аппаратно-независимых пикселях.</translation>
+        </message>
+        <message>
+            <source>Controls the opacity of the (possibly alternating) background behind messages. The color is set through the current theme. 255 corresponds to a fully opaque background.</source>
+            <translation>Прозрачность фоновой подложки сообщений. 255 — полностью непрозрачный фон.</translation>
+        </message>
+        <message>
+            <source>Controls the opacity of the added drop shadow. 255 corresponds to a fully opaque shadow.</source>
+            <translation>Прозрачность тени. 255 — полностью непрозрачная тень.</translation>
+        </message>
+        <message>
+            <source>Draw a line below the most recent message before switching applications.</source>
+            <translation>Рисовать черту под последним сообщением перед переключением между программами.</translation>
+        </message>
+        <message>
+            <source>Enables a drop shadow on the overlay. This will use more processing power.</source>
+            <translation>Включает тень для оверлея (может потребовать больше ресурсов видеокарты).</translation>
+        </message>
+        <message>
+            <source>Grant a random color to users who never set a color for themselves</source>
+            <translation>Присваивать случайный цвет пользователям, которые не выбрали цвет ника на Twitch.</translation>
+        </message>
+        <message>
+            <source>Hide blocked terms from showing up in places like AutoMod messages. This can be useful in case you have some blocked terms that you don't want to show on stream.</source>
+            <translation>Скрывать запрещенные слова в сообщениях AutoMod, чтобы они случайно не отобразились на стриме.</translation>
+        </message>
+        <message>
+            <source>How often Chatterino polls the Twitch API for the shared chat session status.</source>
+            <translation>Частота опроса Twitch API для проверки статуса общего чата.</translation>
+        </message>
+        <message>
+            <source>If Chatterino has seen a user, highlight @mention's of them with their Twitch color.</source>
+            <translation>Если пользователь уже появлялся в чате, подсвечивать @упоминания его цвета на Twitch.</translation>
+        </message>
+        <message>
+            <source>If turned off, only messages from other participants have a shared chat badge</source>
+            <translation>Если выключено, значок общего чата показывается только на сообщениях других участников.</translation>
+        </message>
+        <message>
+            <source>Limit the width of messages containing ASCII art to match the width of Twitch web chat.</source>
+            <translation>Ограничивать ширину сообщений с ASCII-артом под ширину веб-чата Twitch.</translation>
+        </message>
+        <message>
+            <source>Mute your ping sound from playing.</source>
+            <translation>Заглушить воспроизведение звукового сигнала при упоминаниях.</translation>
+        </message>
+        <message>
+            <source>Only if by the same user</source>
+            <translation>Только от одного пользователя</translation>
+        </message>
+        <message>
+            <source>Prevent potentially explicit thumbnails from showing when hovering links.</source>
+            <translation>Скрывать миниатюры с потенциально неприемлемым контентом при наведении на ссылки.</translation>
+        </message>
+        <message>
+            <source>Prevents the rename dialog from opening when a tab is double-clicked</source>
+            <translation>Отключает диалог переименования вкладки по двойному щелчку.</translation>
+        </message>
+        <message>
+            <source>Reduce opacity of messages that were posted before Chatterino was started or while re-connecting.</source>
+            <translation>Снижать яркость сообщений, отправленных до запуска Chatterino или во время переподключения.</translation>
+        </message>
+        <message>
+            <source>Restricted users can be marked by you, your moderators, or Twitch's AutoMod</source>
+            <translation>Ограниченные пользователи могут быть помечены вами, модераторами или AutoMod Twitch.</translation>
+        </message>
+        <message>
+            <source>Show a Send button next to each split input that can be clicked to send the message</source>
+            <translation>Показывать кнопку «Отправить» рядом со строкой ввода чата.</translation>
+        </message>
+        <message>
+            <source>Show a Twitch system message stating what users have joined the chat, only available when the chat has less than 1000 users</source>
+            <translation>Показывать системное сообщение о подключении пользователей к чату (работает при &lt; 1000 участников).</translation>
+        </message>
+        <message>
+            <source>Show a Twitch system message stating what users have left the chat, only available when chat has less than 1000 users</source>
+            <translation>Показывать системное сообщение об отключении пользователей от чата (работает при &lt; 1000 участников).</translation>
+        </message>
+        <message>
+            <source>Show messages that are blocked by AutoMod for containing a public blocked term in the current channel.</source>
+            <translation>Показывать сообщения, заблокированные AutoMod из-за содержания запрещенных на канале слов.</translation>
+        </message>
+        <message>
+            <source>Show when a single message is deleted.
+e.g. A message from TreuKS was deleted: abc</source>
+            <translation>Показывать уведомление при удалении отдельного сообщения модератором (например: Удалено сообщение от TreuKS: abc).</translation>
+        </message>
+        <message>
+            <source>Show whispers as messages in all splits instead of just /whispers.
+Highlighting of this is now controlled in the Highlights page.</source>
+            <translation>Показывать личные сообщения во всех сплитах, а не только в /whispers.
+Подсветка настраивается в разделе «Подсветка».</translation>
+        </message>
+        <message>
+            <source>Shows a red dot in the top right corner of a tab to indicate one of the channels in the tab is live.</source>
+            <translation>Красная точка в углу вкладки указывает, что один из каналов на ней сейчас в эфире.</translation>
+        </message>
+        <message>
+            <source>Slightly change the background behind every other message to help better tell them apart.</source>
+            <translation>Слегка чередует оттенок фона строк сообщений для лучшей читаемости.</translation>
+        </message>
+        <message>
+            <source>The title in the message will be the title the streamer set when they went live, and will not update as the streamer updates their title.</source>
+            <translation>В уведомлении сохраняется заголовок, установленный стримером на момент начала трансляции.</translation>
+        </message>
+        <message>
+            <source>This setting makes Chatterino output silence to your sound device, even if no ping is being played. Try this setting if you have issues with wireless devices not playing the first sound. Note that this can prevent your monitor or computer from sleeping.</source>
+            <translation>Chatterino выводит тишину в звуковое устройство, чтобы беспроводные наушники не «засыпали» и не пропускали начало сигнала уведомления.</translation>
+        </message>
+        <message>
+            <source>This setting will only affect how messages are shown. You can reply to a message regardless of this setting.</source>
+            <translation>Влияет только на отображение сообщений в чате. Отвечать на сообщения можно независимо от этого параметра.</translation>
+        </message>
+        <message>
+            <source>This theme is selected if your system is in a dark theme and you enabled the adaptive 'System' theme.</source>
+            <translation>Эта тема применяется, если в Windows активна темная тема и включена адаптивная тема «System».</translation>
+        </message>
+        <message>
+            <source>This theme is selected if your system is in a light theme and you enabled the adaptive 'System' theme.</source>
+            <translation>Эта тема применяется, если в Windows активна светлая тема и включена адаптивная тема «System».</translation>
+        </message>
+        <message>
+            <source>This will ensure a broadcaster is always easy to ping, even if they don't have chat open or have typed recently.</source>
+            <translation>Автор канала всегда будет доступен в подсказках автодополнения никнеймов.</translation>
+        </message>
+        <message>
+            <source>Twitch GIFs will be shown inline. When disabled, they're shown as links.</source>
+            <translation>GIF-изображения Twitch будут отображаться внутри чата. При отключении — в виде ссылок.</translation>
+        </message>
+        <message>
+            <source>Use %1 where the channel name should be inserted, for example: </source>
+            <translation>Используйте %1 в месте подстановки имени канала, например: </translation>
+        </message>
+        <message>
+            <source>When checked, messages that are very similar to each other can still be shown as long as they're sent by different users.</source>
+            <translation>Похожие сообщения будут отображаться, если они отправлены разными участниками чата.</translation>
+        </message>
+        <message>
+            <source>When disabled, emote tab-completion will complete based on any part of the name.
+e.g. sheffy -&gt; DatSheffy</source>
+            <translation>Если выключено, автодополнение смайлов будет искать совпадения в любой части слова (например, sheffy -&gt; DatSheffy).</translation>
+        </message>
+        <message>
+            <source>When disabled, emotes that overlap other emotes, such as BTTV's cvMask and 7TV's RainTime, will appear as normal emotes.</source>
+            <translation>Если выключено, накладывающиеся смайлики будут отображаться как отдельные обычные смайлы.</translation>
+        </message>
+        <message>
+            <source>When disabled, messages sent in reply threads will include the @mention for the related thread. If the reply context is hidden, these mentions will never be stripped.</source>
+            <translation>Если выключено, отправка в ветку ответов будет содержать @упоминание пользователя.</translation>
+        </message>
+        <message>
+            <source>When disabled, the /mentions tab will not highlight in red when you are mentioned.</source>
+            <translation>Если выключено, вкладка /mentions не будет загораться красным при упоминании вашего никнейма.</translation>
+        </message>
+        <message>
+            <source>When disabled, the x to close a tab will be hidden.
+Tabs can still be closed by right-clicking or pressing %1.</source>
+            <translation>Скрывает крестик закрытия на вкладках.
+Вкладку можно закрыть правым кликом или нажатием %1.</translation>
+        </message>
+        <message>
+            <source>When enabled, "right-click + copy link" will copy the unshortened version of the link.
+e.g. https://bit.ly/mrfors -&gt; https://forsen.tv/</source>
+            <translation>При копировании ссылки будет копироваться полный прямой адрес вместо сокращенного (например: https://bit.ly/... -&gt; https://...).</translation>
+        </message>
+        <message>
+            <source>When enabled, Chatterino will signal an activity to 7TV when you send a chat message. This is used for badges, paints, and personal emotes. When disabled, no activity is sent and others won't see your cosmetics.</source>
+            <translation>Передает статус активности в 7TV при отправке сообщений (необходимо для отображения ваших значков, стилей и персональных смайлов 7TV).</translation>
+        </message>
+        <message>
+            <source>When enabled, Chatterino will signal an activity to BetterTTV when you send a chat message. This is used for badges,  and personal emotes. When disabled, no activity is sent and others won't see your cosmetics.</source>
+            <translation>Передает статус активности в BetterTTV при отправке сообщений (необходимо для персональных значков и смайлов BetterTTV).</translation>
+        </message>
+        <message>
+            <source>When enabled, adjacent emotes will no longer have an added space separating them.</source>
+            <translation>Убирает дополнительный пробел между расположенными подряд смайликами.</translation>
+        </message>
+        <message>
+            <source>When enabled, opening links/usercards requires double-clicking.
+Useful for making sure you don't accidentally click on suspicious links.
+Clicking a link once will pause the chat briefly to allow for a less accident-prone double-clicking.</source>
+            <translation>Открытие ссылок и карточек пользователей требует двойного щелчка.
+Защищает от случайного перехода по ссылкам при быстром чате.</translation>
+        </message>
+        <message>
+            <source>When enabled, pinned messages will stay visible instead of automatically hiding after a few seconds.</source>
+            <translation>Закрепленные сообщения будут оставаться на экране, а не исчезать через несколько секунд.</translation>
+        </message>
+        <message>
+            <source>When enabled, username tab-completion will only complete when using @
+e.g. pajl -&gt; pajl | @pajl -&gt; @pajlada</source>
+            <translation>Автодополнение никнеймов работает только при наличии символа @ перед ником (например: @pajl -&gt; @pajlada).</translation>
+        </message>
+        <message>
+            <source>When enabled, you will automatically subscribe to reply threads you participate in.
+This means reply threads you participate in will use your "Subscribed Reply Threads" highlight settings.</source>
+            <translation>Автоматически подписывает вас на ветки обсуждений с вашим участием (к ним применяются настройки подсветки подписанных веток).</translation>
+        </message>
+        <message>
+            <source>When horizontal tabs are wrapped, extend the line for the whole width of the window.</source>
+            <translation>При многострочном расположении вкладок растягивает активную строку на всю ширину окна.</translation>
+        </message>
+        <message>
+            <source>When using tab-completion, if the username is at the start of the message, include a comma at the end of the name.
+e.g. pajl -&gt; pajlada,</source>
+            <translation>При автодополнении никнейма в начале строки автоматически добавляет запятую после ника (например: pajl -&gt; pajlada,).</translation>
+        </message>
+        <message>
+            <source>With this setting enabled, typing the colon character opens the colon-completion popup which gives you an updating list of emotes matching the text after the colon.</source>
+            <translation>Ввод двоеточия : сразу открывает всплывающий список поиска смайлов по введенным буквам.</translation>
         </message>
     </context>
     <context>
