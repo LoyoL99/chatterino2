@@ -7,9 +7,6 @@
 #include <QCoreApplication>
 #include <QDebug>
 #include <QFile>
-#include <QLibraryInfo>
-
-#include <memory>
 
 namespace chatterino {
 
@@ -21,67 +18,58 @@ I18n &I18n::instance()
 
 bool I18n::loadLanguage(const QString &langCode)
 {
-    if (this->appTranslator_)
+    if (langCode == this->currentLang_ && this->isLoaded_)
     {
-        QCoreApplication::removeTranslator(this->appTranslator_.get());
-        this->appTranslator_.reset();
+        return true;
     }
-    if (this->qtTranslator_)
+
+    if (this->isLoaded_)
     {
-        QCoreApplication::removeTranslator(this->qtTranslator_.get());
-        this->qtTranslator_.reset();
+        QCoreApplication::removeTranslator(&this->appTranslator_);
+        this->isLoaded_ = false;
     }
-    this->appQmBytes_.clear();
 
     this->currentLang_ = langCode;
 
     if (langCode == "en")
     {
+        this->qmData_.clear();
         return true;
     }
 
-    auto appTrans = std::make_unique<QTranslator>();
-    QString resPath = QString(":/translations/chatterino_%1.qm").arg(langCode);
-    bool loaded = appTrans->load(resPath);
+    QString resPath =
+        QStringLiteral(":/translations/chatterino_%1.qm").arg(langCode);
+    bool ok = this->appTranslator_.load(resPath);
+    if (!ok)
+    {
+        ok = this->appTranslator_.load(
+            QStringLiteral("chatterino_%1.qm").arg(langCode),
+            QStringLiteral(":/translations"));
+    }
 
-    if (!loaded)
+    if (!ok)
     {
         QFile resFile(resPath);
         if (resFile.open(QIODevice::ReadOnly))
         {
-            this->appQmBytes_ = resFile.readAll();
-            loaded = appTrans->load(
-                reinterpret_cast<const uchar *>(this->appQmBytes_.constData()),
-                this->appQmBytes_.size());
-            if (!loaded)
-            {
-                qWarning() << "Failed to parse translation from raw bytes for"
-                           << langCode;
-            }
+            this->qmData_ = resFile.readAll();
+            ok = this->appTranslator_.load(
+                reinterpret_cast<const uchar *>(this->qmData_.constData()),
+                this->qmData_.size());
         }
     }
 
-    if (loaded)
+    if (ok)
     {
-        QCoreApplication::installTranslator(appTrans.get());
-        this->appTranslator_ = std::move(appTrans);
-    }
-    else
-    {
-        this->appQmBytes_.clear();
-        qWarning() << "Failed to load translation resource for" << langCode
-                   << "from" << resPath;
+        QCoreApplication::installTranslator(&this->appTranslator_);
+        this->isLoaded_ = true;
+        return true;
     }
 
-    auto qtTrans = std::make_unique<QTranslator>();
-    if (qtTrans->load(QString("qt_%1").arg(langCode),
-                      QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
-    {
-        QCoreApplication::installTranslator(qtTrans.get());
-        this->qtTranslator_ = std::move(qtTrans);
-    }
-
-    return this->appTranslator_ != nullptr;
+    this->qmData_.clear();
+    qWarning() << "Failed to load translation resource for" << langCode
+               << "from" << resPath;
+    return false;
 }
 
 QString I18n::currentLanguage() const

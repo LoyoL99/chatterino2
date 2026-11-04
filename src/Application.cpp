@@ -215,7 +215,6 @@ void Application::initialize(Settings &settings, const Paths &paths)
     assert(!this->initialized);
 
     // Initialize localization
-    I18n::instance().loadLanguage(settings.uiLanguage.getValue());
     settings.uiLanguage.connect([](const QString &val, auto) {
         I18n::instance().loadLanguage(val);
     });

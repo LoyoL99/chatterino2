@@ -9,8 +9,6 @@
 #include <QString>
 #include <QTranslator>
 
-#include <memory>
-
 namespace chatterino {
 
 class I18n : public QObject
@@ -32,10 +30,10 @@ private:
     I18n() = default;
     ~I18n() override = default;
 
-    std::unique_ptr<QTranslator> appTranslator_;
-    std::unique_ptr<QTranslator> qtTranslator_;
-    QByteArray appQmBytes_;
+    QTranslator appTranslator_;
+    QByteArray qmData_;
     QString currentLang_{"en"};
+    bool isLoaded_{false};
 };
 
 }  // namespace chatterino
